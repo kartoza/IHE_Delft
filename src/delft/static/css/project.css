@@ -588,6 +588,7 @@ form .row {
 .dropdown-menu li > a:focus {
     background-color: var(--primary) !important;
     color: white !important;
+    outline: unset !important;
 }
 
 .dropdown-menu a {
@@ -642,14 +643,19 @@ form .row {
     text-decoration: unset;
 }
 
+#ms-app {
+    padding-bottom: 4rem;
+}
+
 #ms-app .dropdown-menu button {
     background-color: unset !important;
     border: none !important;
-    color: white;
+    color: var(--black);
     border-radius: 0 !important;
 }
 
 #ms-app .dropdown-menu button:hover {
+    color: var(--white);
     background-color: var(--primary) !important;
 }
 
@@ -661,4 +667,19 @@ form .row {
     background-color: var(--secondary) !important;
     color: white !important;
     padding: 1rem !important;
+}
+
+/* -------------- HOME TAGS --------------- */
+.msgapi .gn-card-grid li {
+    padding: 0.5rem !important;
+    width: 20%;
+}
+
+.msgapi .gn-card-grid h1 {
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.msgapi .gn-resource-card .card-img-top {
+    height: 120px;
 }
