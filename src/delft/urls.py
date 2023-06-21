@@ -18,13 +18,15 @@
 #
 #########################################################################
 
-from geonode.urls import urlpatterns
+from geonode.urls import urlpatterns, url
+from delft.api import HierarchicalKeywordAutocompleteByParent
 
-'''
 # You can register your own urlpatterns here
 urlpatterns = [
-    url(r'^/?$',
-        homepage,
-        name='home'),
+    url(
+        r'^autocomplete_hierachical_keyword_child/$',
+        HierarchicalKeywordAutocompleteByParent.as_view(),
+        name='autocomplete_hierachical_keyword_child',
+    ),
  ] + urlpatterns
-'''
+
