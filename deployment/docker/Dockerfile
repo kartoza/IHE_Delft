@@ -45,7 +45,6 @@ RUN pip install pylibmc \
     && pip install sherlock
 
 # add bower and grunt command
-COPY test /usr/test
 COPY src /usr/src/delft/
 WORKDIR /usr/src/delft
 

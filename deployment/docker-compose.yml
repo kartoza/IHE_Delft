@@ -3,7 +3,7 @@ version: '3.9'
 # Common Django template for GeoNode and Celery services below
 x-common-django:
   &default-common-django
-  image: kartoza/${COMPOSE_PROJECT_NAME}_django:4.0
+  image: ${COMPOSE_PROJECT_NAME}/django:4.0.x
   build:
     context: ../
     dockerfile: deployment/docker/Dockerfile
@@ -54,7 +54,7 @@ services:
 
   # Nginx is serving django static and media files and proxies to django and geonode
   geonode:
-    image: geonode/nginx:4.0
+    image: ${COMPOSE_PROJECT_NAME}/nginx:4.0.x
     build: ../deployment/nginx/
     container_name: ${COMPOSE_PROJECT_NAME}_nginx
     environment:
@@ -75,7 +75,7 @@ services:
 
   # Gets and installs letsencrypt certificates
   letsencrypt:
-    image: geonode/letsencrypt:4.0
+    image: ${COMPOSE_PROJECT_NAME}/letsencrypt:4.0.x
     build: ../deployment/letsencrypt
     container_name: ${COMPOSE_PROJECT_NAME}_letsencrypt
     environment:
@@ -153,7 +153,7 @@ services:
   # django application for development
   dev:
     <<: *default-common-django
-    image: kartoza/${COMPOSE_PROJECT_NAME}_django_dev:4.0
+    image: ${COMPOSE_PROJECT_NAME}/django_dev:4.0.x
     container_name: ${COMPOSE_PROJECT_NAME}_dev
     entrypoint: [ ]
     build:

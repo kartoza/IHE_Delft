@@ -15,7 +15,7 @@ def get_parent_keywords(context):
 @register.simple_tag(takes_context=True)
 def get_other_parent_keyword(context):
     """Return other children."""
-    return {"slug": "_other", "name": "Key-words"}
+    return {"slug": "_other", "name": "Keywords"}
 
 
 @register.simple_tag(takes_context=True)
@@ -23,7 +23,7 @@ def get_keyword_children(context, keyword_slug):
     """Return keyword children."""
     try:
         keyword = HierarchicalKeyword.objects.get(slug=keyword_slug)
-        return keyword.get_tree(parent=keyword).exclude(pk=keyword.pk).filter(
+        return keyword.get_children().filter(
             pk__in=HierarchicalKeywordExtension.objects.filter(
                 featured=True
             ).values_list('keyword__id', flat=True)
@@ -37,9 +37,7 @@ def get_keyword_children_in_list(context, keyword_slug):
     """Return keyword children."""
     try:
         keyword = HierarchicalKeyword.objects.get(slug=keyword_slug)
-        query = keyword.get_tree(parent=keyword).exclude(
-            pk=keyword.pk
-        )
+        query = keyword.get_children()
     except HierarchicalKeyword.DoesNotExist:
         query = HierarchicalKeyword.objects.none()
     if keyword_slug == '_other':
