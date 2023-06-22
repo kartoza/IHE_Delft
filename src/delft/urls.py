@@ -22,12 +22,14 @@ from dynamic_rest import routers
 from geonode.urls import urlpatterns, url, include
 
 from delft.api import (
+    GroupViewSetWithCount,
     HierarchicalKeywordAutocompleteByParent,
     HierarchicalKeywordViewSetByParent,
-    ResourceBaseViewSetWithKeywords
+    ResourceBaseViewSetWithKeywords,
 )
 
 router = routers.DynamicRouter()
+router.register(r'groups', GroupViewSetWithCount, 'group-profiles')
 router.register(
     r'resources', ResourceBaseViewSetWithKeywords, 'base-resources'
 )
