@@ -4,6 +4,7 @@
 {% load delft_tags %}
 
 {% get_parent_keywords as PARENT_KEYWORDS %}
+{% get_group_profiles as GROUP_PROFILES %}
 
 <!DOCTYPE html>
 <html class="msgapi">
@@ -109,6 +110,36 @@
                                     <div class="gn-card-grid">
                                         <div style="display: flex; width: 100%; height: 100%;">
                                             <div style="flex: 1 1 0%; width: 100%; height: 100%; padding-bottom: 50px;">
+                                                {# PROFILES #}
+                                                {% if GROUP_PROFILES %}
+                                                    <div class="gn-card-grid-container" style="min-height: auto;">
+                                                        <h1 class="explore-viewer-title">Project profiles</h1>
+                                                        <ul>
+                                                            {% for profile in GROUP_PROFILES %}
+                                                                <li>
+                                                                    <div class="gn-resource-card gn-card-type-grid ">
+                                                                        <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&filter%7Bgroup.name.in%7D={{ profile.slug }}"></a>
+                                                                        <div class="card-resource-grid">
+                                                                            <img class="card-img-top" src="{% if profile.logo_url %}{{ profile.logo_url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
+                                                                            <div class="gn-resource-card-body-wrapper">
+                                                                                <div class="card-body">
+                                                                                    <div class="card-title">
+                                                                                        <div>{{ profile.title }}</div>
+                                                                                    </div>
+                                                                                    <div class="map-abstract">
+                                                                                        <p class="card-text gn-card-description">{% if profile.description %}{{ profile.description }}{% else %}No description{% endif %}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                {% endif %}
+
+                                                {# KEYWORDS #}
                                                 {% for parent_keyword in PARENT_KEYWORDS %}
                                                     {% get_keyword_children parent_keyword.slug as KEYWORDS %}
                                                     {% if KEYWORDS %}
@@ -120,7 +151,7 @@
                                                                         <div class="gn-resource-card gn-card-type-grid ">
                                                                             <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&f=document&f=map&f=geostory&f=dashboard&filter%7Bkeywords.slug.in%7D={{ keyword.slug }}"></a>
                                                                             <div class="card-resource-grid">
-                                                                                <img class="card-img-top" src="{% if keyword.hierarchicalkeywordextension.icon %}{{ keyword.hierarchicalkeywordextension.icon.url }}{% else %}{% static "img/no-image.jpg" %}{% endif %}">
+                                                                                <img class="card-img-top" src="{% if keyword.hierarchicalkeywordextension.icon %}{{ keyword.hierarchicalkeywordextension.icon.url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
                                                                                 <div class="gn-resource-card-body-wrapper">
                                                                                     <div class="card-body">
                                                                                         <div class="card-title">
@@ -151,14 +182,14 @@
                                                                     <div class="gn-resource-card gn-card-type-grid ">
                                                                         <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&filter%7Bregions.name.in%7D={{ region.region.name }}"></a>
                                                                         <div class="card-resource-grid">
-                                                                            <img class="card-img-top" src="{% if region.icon %}{{ region.icon.url }}{% else %}{% static "img/no-image.jpg" %}{% endif %}">
+                                                                            <img class="card-img-top" src="{% if region.icon %}{{ region.icon.url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
                                                                             <div class="gn-resource-card-body-wrapper">
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">
                                                                                         <div>{{ region.region.name }}</div>
                                                                                     </div>
                                                                                     <div class="map-abstract">
-                                                                                        <p class="card-text gn-card-description">{% if region.description %}{{ region.region }}{% else %}No description{% endif %}</p>
+                                                                                        <p class="card-text gn-card-description">{% if region.description %}{{ region.description }}{% else %}No description{% endif %}</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

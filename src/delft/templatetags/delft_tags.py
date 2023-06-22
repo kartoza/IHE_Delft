@@ -1,9 +1,15 @@
 from django import template
-from geonode.base.models import HierarchicalKeyword
+from geonode.base.models import HierarchicalKeyword, GroupProfile
 
 from delft.models import HierarchicalKeywordExtension, RegionExtension
 
 register = template.Library()
+
+
+@register.simple_tag(takes_context=True)
+def get_group_profiles(context):
+    """Return group profiles keywords."""
+    return GroupProfile.objects.order_by('title')
 
 
 @register.simple_tag(takes_context=True)
