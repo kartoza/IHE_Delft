@@ -18,13 +18,29 @@
 #
 #########################################################################
 
-from geonode.urls import urlpatterns
+from dynamic_rest import routers
+from geonode.urls import urlpatterns, url, include
 
-'''
+from delft.api import (
+    HierarchicalKeywordAutocompleteByParent,
+    HierarchicalKeywordViewSetByParent,
+    ResourceBaseViewSetWithKeywords
+)
+
+router = routers.DynamicRouter()
+router.register(
+    r'resources', ResourceBaseViewSetWithKeywords, 'base-resources'
+)
+router.register(
+    r'keywords', HierarchicalKeywordViewSetByParent, 'keywords'
+)
+
 # You can register your own urlpatterns here
 urlpatterns = [
-    url(r'^/?$',
-        homepage,
-        name='home'),
- ] + urlpatterns
-'''
+                  url('^api/v2/', include(router.urls)),
+                  url(
+                      r'^autocomplete_hierachical_keyword_child/$',
+                      HierarchicalKeywordAutocompleteByParent.as_view(),
+                      name='autocomplete_hierachical_keyword_child',
+                  ),
+              ] + urlpatterns

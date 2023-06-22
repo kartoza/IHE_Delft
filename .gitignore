@@ -66,4 +66,5 @@ local_settings.py
 .vscode/
 .vagrant/
 Vagrantfile
-/.env
+deployment/.env
+deployment/docker-compose.override.yml

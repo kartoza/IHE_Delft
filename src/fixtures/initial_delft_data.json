@@ -1,0 +1,538 @@
+[
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 1,
+    "fields": {
+      "name": "Thematic areas",
+      "slug": "thematic-areas",
+      "path": "000F",
+      "depth": 1,
+      "numchild": 3
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 2,
+    "fields": {
+      "name": "Water and Health",
+      "slug": "water-and-health",
+      "path": "000F0004",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 3,
+    "fields": {
+      "name": "Water for Food",
+      "slug": "water-for-food",
+      "path": "000F0005",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 4,
+    "fields": {
+      "name": "River Basins and Deltas",
+      "slug": "river-basins-and-deltas",
+      "path": "000F0003",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 5,
+    "fields": {
+      "name": "Type of activities",
+      "slug": "type-of-activities",
+      "path": "000H",
+      "depth": 1,
+      "numchild": 4
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 6,
+    "fields": {
+      "name": "Partnerships & Joint learning: Inclusive networks & cross-learning",
+      "slug": "partnerships-joint-learning",
+      "path": "000H0009",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 7,
+    "fields": {
+      "name": "Research & Advocacy: Interdisciplinary action-research",
+      "slug": "research-advocacy",
+      "path": "000H000B",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 8,
+    "fields": {
+      "name": "Education & Training: Curricula & training courses",
+      "slug": "education-training",
+      "path": "000H0005",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 9,
+    "fields": {
+      "name": "Institutional Strengthening: Education & training for employees in the water sectors",
+      "slug": "institutional-strengthening",
+      "path": "000H0007",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 10,
+    "fields": {
+      "name": "Type of outputs",
+      "slug": "type-of-outputs",
+      "path": "000I",
+      "depth": 1,
+      "numchild": 12
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 11,
+    "fields": {
+      "name": "Webinars",
+      "slug": "webinars",
+      "path": "000I000H",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 12,
+    "fields": {
+      "name": "Journal publications & Books",
+      "slug": "journal-publications-books",
+      "path": "000I0009",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 13,
+    "fields": {
+      "name": "Conference presentations & Posters",
+      "slug": "conference-presentations-posters",
+      "path": "000I0006",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 14,
+    "fields": {
+      "name": "Presentations for practitioners",
+      "slug": "presentations-for-practitioners",
+      "path": "000I000D",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 15,
+    "fields": {
+      "name": "Maps & Databases",
+      "slug": "maps-databases",
+      "path": "000I000B",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 16,
+    "fields": {
+      "name": "Softwares & Technologies",
+      "slug": "softwares-technologies",
+      "path": "000I000F",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 17,
+    "fields": {
+      "name": "Protocols, Toolkits, Strategies & Reports",
+      "slug": "protocols-toolkits-strategies-reports",
+      "path": "000I000E",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 18,
+    "fields": {
+      "name": "Advocacy material & Policy briefs",
+      "slug": "advocacy-material-policy-briefs",
+      "path": "000I0005",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 19,
+    "fields": {
+      "name": "Videos, Blogs, Podcasts & News items",
+      "slug": "videos-blogs-podcasts-news-items",
+      "path": "000I000G",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 20,
+    "fields": {
+      "name": "MSc & BSc Theses",
+      "slug": "msc-bsc-theses",
+      "path": "000I000A",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 21,
+    "fields": {
+      "name": "PhD Theses",
+      "slug": "phd-theses",
+      "path": "000I000C",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 22,
+    "fields": {
+      "name": "Education and training material (online & offline)",
+      "slug": "education-and-training-material",
+      "path": "000I0008",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 23,
+    "fields": {
+      "name": "Phases",
+      "slug": "phases",
+      "path": "000B",
+      "depth": 1,
+      "numchild": 2
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 24,
+    "fields": {
+      "name": "Phase 2",
+      "slug": "phase-2",
+      "path": "000B0002",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 25,
+    "fields": {
+      "name": "Phase 3",
+      "slug": "phase-3",
+      "path": "000B0004",
+      "depth": 2,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 27,
+    "fields": {
+      "name": "Groundwater",
+      "slug": "groundwater",
+      "path": "0006",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 28,
+    "fields": {
+      "name": "Irrigation",
+      "slug": "irr",
+      "path": "0009",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 29,
+    "fields": {
+      "name": "Remote sensing/GIS",
+      "slug": "remote-sensing-GIS",
+      "path": "000D",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 30,
+    "fields": {
+      "name": "Agro-ecology",
+      "slug": "agro-ecology",
+      "path": "0001",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 31,
+    "fields": {
+      "name": "Ecosystems health",
+      "slug": "ecosystems-health",
+      "path": "0003",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 32,
+    "fields": {
+      "name": "Sanitation",
+      "slug": "sanitation",
+      "path": "000E",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 33,
+    "fields": {
+      "name": "Water supply",
+      "slug": "water-supply",
+      "path": "000P",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 34,
+    "fields": {
+      "name": "Wastewater treatment",
+      "slug": "wastewater-treatment",
+      "path": "000J",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 35,
+    "fields": {
+      "name": "Water, energy and food",
+      "slug": "water-energy-and-food",
+      "path": "000Q",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 36,
+    "fields": {
+      "name": "Water reuse",
+      "slug": "water-reuse",
+      "path": "000O",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 37,
+    "fields": {
+      "name": "Water quality and pollution",
+      "slug": "water-quality-and-pollution",
+      "path": "000N",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 38,
+    "fields": {
+      "name": "Drought management",
+      "slug": "drought-management",
+      "path": "0002",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 39,
+    "fields": {
+      "name": "Flood management",
+      "slug": "flood-management",
+      "path": "0004",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 40,
+    "fields": {
+      "name": "Gender and inclusion",
+      "slug": "gender-and-inclusion",
+      "path": "0005",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 41,
+    "fields": {
+      "name": "Water justice",
+      "slug": "water-justice",
+      "path": "000L",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 42,
+    "fields": {
+      "name": "Water management and governance",
+      "slug": "water-management-and-governance",
+      "path": "000M",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 43,
+    "fields": {
+      "name": "Water diplomacy",
+      "slug": "water-diplomacy",
+      "path": "000K",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 44,
+    "fields": {
+      "name": "Transboundary water",
+      "slug": "transboundary-water",
+      "path": "000G",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 45,
+    "fields": {
+      "name": "Indigenous knowledge",
+      "slug": "indigenous-knowledge",
+      "path": "0008",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 46,
+    "fields": {
+      "name": "Planning and policies",
+      "slug": "planning-and-policies",
+      "path": "000C",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "base.hierarchicalkeyword",
+    "pk": 47,
+    "fields": {
+      "name": "Impact pathways and joint learning",
+      "slug": "impact-pathways-and-joint-learning",
+      "path": "0007",
+      "depth": 1,
+      "numchild": 0
+    }
+  },
+  {
+    "model": "delft.hierarchicalkeywordextension",
+    "pk": 2,
+    "fields": {
+      "featured": true,
+      "description": "",
+      "icon": "",
+      "keyword": 4
+    }
+  },
+  {
+    "model": "delft.hierarchicalkeywordextension",
+    "pk": 3,
+    "fields": {
+      "featured": true,
+      "description": "",
+      "icon": "",
+      "keyword": 2
+    }
+  },
+  {
+    "model": "delft.hierarchicalkeywordextension",
+    "pk": 4,
+    "fields": {
+      "featured": true,
+      "description": "",
+      "icon": "",
+      "keyword": 3
+    }
+  }
+]

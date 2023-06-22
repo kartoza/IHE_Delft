@@ -1,0 +1,48 @@
+{% load delft_tags %}
+{% get_keyword_children_in_list keyword.slug as CHILDREN %}
+
+<div class="col-lg-12 keyword-selection">
+    <span><label>{{ keyword.name }}</label></span>
+    <select id="{{ keyword.slug }}" multiple="multiple">
+
+    </select>
+</div>
+<script>
+  const children{{ keyword.id }} = {{ CHILDREN|safe }};
+  keywordIds.push('#{{ keyword.slug }}');
+  console.log(children{{ keyword.id }})
+
+  {# Init value #}
+  children{{ keyword.id }}.filter(
+    keyword => $('*[name="resource-keywords"]').val().includes(keyword)
+  ).map(name => {
+    $('#{{ keyword.slug }}').append(`<option value="${name}" selected="selected">${name}</option>`)
+  })
+
+  $('#{{ keyword.slug }}').select2({
+    tags: {% if tags %}true{% else %}false{% endif %},
+    ajax: {
+      url: '/autocomplete_hierachical_keyword_child/?parent={{ keyword.slug }}',
+      dataType: 'json',
+      processResults: function (data) {
+        return {
+          results: data.results.map(item => {
+            item.id = item.text;
+            return item
+          })
+        };
+      }
+    },
+  });
+  $('#{{ keyword.slug }}').change(evt => {
+    const values = []
+    $('*[name="resource-keywords"]').html('')
+    keywordIds.map(id => {
+      $(id).val().map(name => {
+        values.push(name)
+        $('*[name="resource-keywords"]').append(`<option value="${name}" selected="selected">${name}</option>`)
+      })
+    })
+    $('*[name="resource-keywords"]').val(values)
+  })
+</script>

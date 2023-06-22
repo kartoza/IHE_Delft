@@ -1,6 +1,10 @@
 {% load static %}
 {% load client_version %}
 {% load i18n %}
+{% load delft_tags %}
+
+{% get_parent_keywords as PARENT_KEYWORDS %}
+
 <!DOCTYPE html>
 <html class="msgapi">
     <head>
@@ -98,6 +102,80 @@
                 {% endblock %}
 
                 {% block container %}
+                    <div id="ms-app" class="app-router fill">
+                        <div class="gn-container">
+                            <div class="gn-row gn-home-section">
+                                <div class="gn-grid-container container">
+                                    <div class="gn-card-grid">
+                                        <div style="display: flex; width: 100%; height: 100%;">
+                                            <div style="flex: 1 1 0%; width: 100%; height: 100%; padding-bottom: 50px;">
+                                                {% for parent_keyword in PARENT_KEYWORDS %}
+                                                    {% get_keyword_children parent_keyword.slug as KEYWORDS %}
+                                                    {% if KEYWORDS %}
+                                                        <div class="gn-card-grid-container" style="min-height: auto;">
+                                                            <h1 class="explore-viewer-title">{{ parent_keyword.name }}</h1>
+                                                            <ul>
+                                                                {% for keyword in KEYWORDS %}
+                                                                    <li>
+                                                                        <div class="gn-resource-card gn-card-type-grid ">
+                                                                            <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&f=document&f=map&f=geostory&f=dashboard&filter%7Bkeywords.slug.in%7D={{ keyword.slug }}"></a>
+                                                                            <div class="card-resource-grid">
+                                                                                <img class="card-img-top" src="{% if keyword.hierarchicalkeywordextension.icon %}{{ keyword.hierarchicalkeywordextension.icon.url }}{% else %}{% static "img/no-image.jpg" %}{% endif %}">
+                                                                                <div class="gn-resource-card-body-wrapper">
+                                                                                    <div class="card-body">
+                                                                                        <div class="card-title">
+                                                                                            <div>{{ keyword.name }}</div>
+                                                                                        </div>
+                                                                                        <div class="map-abstract">
+                                                                                            <p class="card-text gn-card-description">{% if keyword.hierarchicalkeywordextension.description %}{{ keyword.hierarchicalkeywordextension.description }}{% else %}No description{% endif %}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {# REGIONS #}
+                                                {% get_featured_regions as REGIONS %}
+                                                {% if REGIONS %}
+                                                    <div class="gn-card-grid-container" style="min-height: auto;">
+                                                        <h1 class="explore-viewer-title">Regions</h1>
+                                                        <ul>
+                                                            {% for region in REGIONS %}
+                                                                <li>
+                                                                    <div class="gn-resource-card gn-card-type-grid ">
+                                                                        <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&filter%7Bregions.name.in%7D={{ region.region.name }}"></a>
+                                                                        <div class="card-resource-grid">
+                                                                            <img class="card-img-top" src="{% if region.icon %}{{ region.icon.url }}{% else %}{% static "img/no-image.jpg" %}{% endif %}">
+                                                                            <div class="gn-resource-card-body-wrapper">
+                                                                                <div class="card-body">
+                                                                                    <div class="card-title">
+                                                                                        <div>{{ region.region.name }}</div>
+                                                                                    </div>
+                                                                                    <div class="map-abstract">
+                                                                                        <p class="card-text gn-card-description">{% if region.description %}{{ region.region }}{% else %}No description{% endif %}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endblock %}
 
                 {% block ms_scripts %}
