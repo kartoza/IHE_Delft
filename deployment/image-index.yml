@@ -1,4 +1,4 @@
 images:
   - name: wadp-geonode
-    dockerfile: Dockerfile
+    dockerfile: deployment/docker/Dockerfile
     buildPath: .
