@@ -672,7 +672,7 @@ form .row {
 .gn-footer {
     background-color: var(--secondary) !important;
     color: white !important;
-    padding: 1rem !important;
+    padding: 0.8rem 1rem !important;
 }
 
 /* -------------- HOME TAGS --------------- */
