@@ -140,13 +140,8 @@ def get_project_base_right_topbar_menu(context):
             {
                 "type": "link",
                 "href": "/groups/",
-                "label": "Groups"
-            },
-            {
-                "type": "link",
-                "href": "/groundwater/organisation/",
-                "label": "Organisations"
-            } if user.is_superuser else None,
+                "label": "Group profiles"
+            }
         ]
     }
     if user.is_authenticated and not Configuration.load().read_only:
@@ -167,7 +162,7 @@ def get_project_base_right_topbar_menu(context):
             {
                 "type": "link",
                 "href": "/groups/create/",
-                "label": "Create group"
+                "label": "Create group profile"
             } if user.is_superuser else None,
         ])
     return [
