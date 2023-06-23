@@ -476,6 +476,7 @@ form .row {
     padding: 0.5rem;
 }
 
+#gn-search-bar #gn-search-bar-clear,
 #gn-search-bar #gn-search-bar-apply {
     height: 100%;
     width: 100%;
@@ -493,6 +494,11 @@ form .row {
 
 #gn-search-bar-apply:focus {
     box-shadow: unset !important;
+}
+
+#gn-search-bar-clear:hover,
+#gn-search-bar-apply:hover {
+    color: white;
 }
 
 
