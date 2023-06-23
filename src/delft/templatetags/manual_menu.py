@@ -2,7 +2,6 @@ from django import template
 from django.utils.safestring import mark_safe
 from geonode.base.models import Configuration
 from geonode_mapstore_client.templatetags.get_menu_json import get_user_menu
-
 register = template.Library()
 
 
@@ -14,8 +13,7 @@ def get_list_element(list_data, active_slug):
                 url=data['url'],
                 title=data['title'],
                 indicator='(Pending)' if not data['live'] else '',
-                c="data-jstree='{\"opened\":true,\"selected\":true}'" if data[
-                                                                             'slug'] == active_slug else ''
+                c="data-jstree='{\"opened\":true,\"selected\":true}'" if data['slug'] == active_slug else ''
             )
         if 'children' in data:
             element += get_list_element(data['children'], active_slug)
