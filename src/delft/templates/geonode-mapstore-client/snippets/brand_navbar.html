@@ -64,6 +64,9 @@
                         <li class="gn-search-bar-li">
                             {% include './search_bar.html' with search_bar_id='gn-search-bar' %}
                         </li>
+                        {% for menu_item in BASE_TOPBAR_MENU_RIGHT %}
+                            {% include './menu_item.html' with menu_item=menu_item align_right=True variant='primary' %}
+                        {% endfor %}
                         {% for menu_item in USER_MENU %}
                             {% include './menu_item.html' with menu_item=menu_item align_right=True variant='primary' %}
                         {% endfor %}
