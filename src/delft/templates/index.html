@@ -118,7 +118,7 @@
                                                             {% for profile in GROUP_PROFILES %}
                                                                 <li>
                                                                     <div class="gn-resource-card gn-card-type-grid ">
-                                                                        <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&filter%7Bgroup.name.in%7D={{ profile.slug }}"></a>
+                                                                        <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&f=document&f=map&f=geostory&f=dashboard&filter%7Bgroup.name.in%7D={{ profile.slug }}"></a>
                                                                         <div class="card-resource-grid">
                                                                             <img class="card-img-top" src="{% if profile.logo_url %}{{ profile.logo_url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
                                                                             <div class="gn-resource-card-body-wrapper">
@@ -149,7 +149,7 @@
                                                                 {% for keyword in KEYWORDS %}
                                                                     <li>
                                                                         <div class="gn-resource-card gn-card-type-grid ">
-                                                                            <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&f=document&f=map&f=geostory&f=dashboard&filter%7Bkeywords.slug.in%7D={{ keyword.slug }}"></a>
+                                                                            <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&f=document&f=map&f=geostory&f=dashboard&keywords%7B{{ keyword.get_parent.slug }}.slug.in%7D={{ keyword.slug }}"></a>
                                                                             <div class="card-resource-grid">
                                                                                 <img class="card-img-top" src="{% if keyword.hierarchicalkeywordextension.icon %}{{ keyword.hierarchicalkeywordextension.icon.url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
                                                                                 <div class="gn-resource-card-body-wrapper">
@@ -180,7 +180,7 @@
                                                             {% for region in REGIONS %}
                                                                 <li>
                                                                     <div class="gn-resource-card gn-card-type-grid ">
-                                                                        <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&filter%7Bregions.name.in%7D={{ region.region.name }}"></a>
+                                                                        <a class="gn-resource-card-link" href="/catalogue/#/search/?f=dataset&f=document&f=map&f=geostory&f=dashboard&filter%7Bregions.name.in%7D={{ region.region.name }}"></a>
                                                                         <div class="card-resource-grid">
                                                                             <img class="card-img-top" src="{% if region.icon %}{{ region.icon.url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
                                                                             <div class="gn-resource-card-body-wrapper">
