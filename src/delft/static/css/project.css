@@ -76,8 +76,7 @@ body.project-home {
 }
 
 .branding a img {
-    height: 100%;
-    padding: 5px 0;
+    height: 3.5rem !important;
 }
 
 .branding a img:focus-visible {
@@ -445,7 +444,7 @@ form .row {
 
 .msgapi .gn-menu {
     padding: 0;
-    height: 4rem;
+    height: 5rem;
 }
 
 .msgapi .gn-menu.gn-primary {
