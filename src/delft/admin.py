@@ -20,28 +20,42 @@
 from django.contrib import admin
 from geonode.base.admin import RegionAdmin, HierarchicalKeywordAdmin
 from geonode.base.models import HierarchicalKeyword, Region
+from geonode.groups.admin import GroupProfileAdmin
+from geonode.groups.models import GroupProfile
 
-from delft.models import HierarchicalKeywordExtension, RegionExtension
+from delft.models import (
+    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension
+)
 
 admin.site.unregister(HierarchicalKeyword)
 admin.site.unregister(Region)
+admin.site.unregister(GroupProfile)
 
 
-class RegionExtensionAdmin(admin.StackedInline):
+class RegionExtensionInline(admin.StackedInline):
     model = RegionExtension
 
 
-class HierarchicalKeywordExtensionAdmin(admin.StackedInline):
+class HierarchicalKeywordExtensionInline(admin.StackedInline):
     model = HierarchicalKeywordExtension
 
 
-class UpdatedRegionAdmin(RegionAdmin):
-    inlines = [RegionExtensionAdmin, ]
+class GroupProfileExtensionInline(admin.StackedInline):
+    model = GroupProfileExtension
 
 
-class UpdatedHierarchicalKeywordAdmin(HierarchicalKeywordAdmin):
-    inlines = [HierarchicalKeywordExtensionAdmin, ]
+class RegionExtensionAdmin(RegionAdmin):
+    inlines = [RegionExtensionInline]
 
 
-admin.site.register(Region, UpdatedRegionAdmin)
-admin.site.register(HierarchicalKeyword, UpdatedHierarchicalKeywordAdmin)
+class HierarchicalKeywordExtensionAdmin(HierarchicalKeywordAdmin):
+    inlines = [HierarchicalKeywordExtensionInline]
+
+
+class GroupProfileExtensionAdmin(GroupProfileAdmin):
+    inlines = [GroupProfileExtensionInline]
+
+
+admin.site.register(Region, RegionExtensionAdmin)
+admin.site.register(HierarchicalKeyword, HierarchicalKeywordExtensionAdmin)
+admin.site.register(GroupProfile, GroupProfileExtensionAdmin)
