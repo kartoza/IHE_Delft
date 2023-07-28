@@ -5,6 +5,7 @@
 
 {% get_parent_keywords as PARENT_KEYWORDS %}
 {% get_group_profiles as GROUP_PROFILES %}
+{% get_featured_geostories as GEOSTORIES %}
 
 <!DOCTYPE html>
 <html class="msgapi">
@@ -126,7 +127,7 @@
                                                                                     <div class="card-title">
                                                                                         <div>{{ profile.title }}</div>
                                                                                     </div>
-                                                                                    <div class="map-abstract">
+                                                                                    <div class="card-abstract">
                                                                                         <p class="card-text gn-card-description">{% if profile.description %}{{ profile.description }}{% else %}No description{% endif %}</p>
                                                                                     </div>
                                                                                 </div>
@@ -157,7 +158,7 @@
                                                                                         <div class="card-title">
                                                                                             <div>{{ keyword.name }}</div>
                                                                                         </div>
-                                                                                        <div class="map-abstract">
+                                                                                        <div class="card-abstract">
                                                                                             <p class="card-text gn-card-description">{% if keyword.hierarchicalkeywordextension.description %}{{ keyword.hierarchicalkeywordextension.description }}{% else %}No description{% endif %}</p>
                                                                                         </div>
                                                                                     </div>
@@ -175,7 +176,7 @@
                                                 {% get_featured_regions as REGIONS %}
                                                 {% if REGIONS %}
                                                     <div class="gn-card-grid-container" style="min-height: auto;">
-                                                        <h1 class="explore-viewer-title">Regions</h1>
+                                                        <h1 class="explore-viewer-title">Focus Regions</h1>
                                                         <ul>
                                                             {% for region in REGIONS %}
                                                                 <li>
@@ -188,8 +189,37 @@
                                                                                     <div class="card-title">
                                                                                         <div>{{ region.region.name }}</div>
                                                                                     </div>
-                                                                                    <div class="map-abstract">
+                                                                                    <div class="card-abstract">
                                                                                         <p class="card-text gn-card-description">{% if region.description %}{{ region.description }}{% else %}No description{% endif %}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                {% endif %}
+
+                                                {# GEOSTORIES #}
+                                                {% if GEOSTORIES %}
+                                                    <div class="gn-card-grid-container" style="min-height: auto;">
+                                                        <h1 class="explore-viewer-title">Geostories</h1>
+                                                        <ul>
+                                                            {% for geostory in GEOSTORIES %}
+                                                                <li>
+                                                                    <div class="gn-resource-card gn-card-type-grid ">
+                                                                        <a class="gn-resource-card-link" href="/catalogue/#/geostory/{{ geostory.id }}"></a>
+                                                                        <div class="card-resource-grid">
+                                                                            <img class="card-img-top" src="{% if geostory.icon %}{{ geostory.icon.url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
+                                                                            <div class="gn-resource-card-body-wrapper">
+                                                                                <div class="card-body">
+                                                                                    <div class="card-title">
+                                                                                        <div>{{ geostory.title }}</div>
+                                                                                    </div>
+                                                                                    <div class="card-abstract">
+                                                                                        <p class="card-text gn-card-description">{% if geostory.abstract %}{{ geostory.abstract|safe }}{% else %}No description{% endif %}</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
