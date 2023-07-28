@@ -3,14 +3,12 @@
 
 <div class="col-lg-12 keyword-selection">
     <span><label>{{ keyword.name }}</label></span>
-    <select id="{{ keyword.slug }}" multiple="multiple">
-
+    <select id="{{ keyword.slug }}" multiple="multiple" required>
     </select>
 </div>
 <script>
   const children{{ keyword.id }} = {{ CHILDREN|safe }};
   keywordIds.push('#{{ keyword.slug }}');
-  console.log(children{{ keyword.id }})
 
   {# Init value #}
   children{{ keyword.id }}.filter(
@@ -21,6 +19,7 @@
 
   $('#{{ keyword.slug }}').select2({
     tags: {% if tags %}true{% else %}false{% endif %},
+    maximumSelectionLength: 4,
     ajax: {
       url: '/autocomplete_hierachical_keyword_child/?parent={{ keyword.slug }}',
       dataType: 'json',
