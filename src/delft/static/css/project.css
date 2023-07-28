@@ -726,7 +726,7 @@ form .row {
 
 .other-button {
     background-color: var(--secondary);
-    border: 1px solid white var(--secondary);
+    border: 1px solid var(--secondary);
     padding: 0.5rem 1rem;
     margin-top: 1rem !important;
     color: white;
@@ -736,5 +736,27 @@ form .row {
 
 .other-button:hover {
     color: var(--secondary);
+    background-color: white;
+}
+
+.floating-button {
+    z-index: 100000;
+    position: fixed;
+    top: 50%;
+    right: 0;
+}
+
+.floating-button button {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary);
+    border: 1px solid var(--secondary);
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.8rem !important;
+}
+
+.floating-button button:hover {
+    border: 1px solid var(--secondary) !important;
+    color: var(--secondary) !important;
     background-color: white;
 }
