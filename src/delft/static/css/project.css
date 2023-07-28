@@ -760,3 +760,7 @@ form .row {
     color: var(--secondary) !important;
     background-color: white;
 }
+
+#basicCategoryInfo {
+    display: none;
+}
