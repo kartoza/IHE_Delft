@@ -18,6 +18,7 @@
 #
 #########################################################################
 
+from django.conf.urls.i18n import i18n_patterns
 from dynamic_rest import routers
 from geonode.urls import urlpatterns, url, include
 
@@ -36,9 +37,18 @@ router.register(
 router.register(
     r'keywords', HierarchicalKeywordViewSetByParent, 'keywords'
 )
+from django.views.generic.base import RedirectView
 
 # You can register your own urlpatterns here
-urlpatterns = [
+urlpatterns = i18n_patterns(
+    url(
+        r'^admin/delft/sitepreferences/$',
+        RedirectView.as_view(
+            url='/admin/delft/sitepreferences/1/change/',
+            permanent=False),
+        name='preferences'
+    ),
+) + [
                   url('^api/v2/', include(router.urls)),
                   url(
                       r'^autocomplete_hierachical_keyword_child/$',

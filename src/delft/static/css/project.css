@@ -129,10 +129,7 @@ body.project-home {
     color: #fff;
     font-size: 18px;
     line-height: 1.4;
-    height: 17rem;
-    width: 17rem;
-    background-color: var(--primary-opacity);
-    padding: 7rem;
+    padding: 3rem;
 }
 
 .banner-text h2 {
@@ -718,4 +715,8 @@ form .row {
 .resource-keywords {
     opacity: 0 !important;
     height: 0 !important;
+}
+
+.separator {
+    flex-grow: 1;
 }

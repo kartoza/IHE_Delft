@@ -1,5 +1,13 @@
 [
   {
+    "model": "delft.sitepreferences",
+    "pk": 1,
+    "fields": {
+      "landing_page_banner_title": "WDPP Data Sharing Portal",
+      "landing_page_banner_description": "At IHE Delft, we believe that bringing together inclusive partnerships and diverse knowledge is key to solving water and development challenges. Therefore, we fund bold, creative and transdisciplinary projects that combine research, education and capacity-strengthening activities. Launched in 2008, the Water and Development Partnership Programme has been nurturing a community of scientists, practitioners and policymakers from over 40 countries, with the support of the Dutch Ministry of Foreign Affairs. \r\n<br>\r\n<br>\r\nYou are visiting the repository of our programme. This is a living space, where outputs of all our projects will be regularly categorised along project themes and regions. We hope you find what you are looking for."
+    }
+  },
+  {
     "model": "base.hierarchicalkeyword",
     "pk": 1,
     "fields": {

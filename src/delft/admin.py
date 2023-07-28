@@ -26,6 +26,7 @@ from geonode.groups.models import GroupProfile
 from delft.models import (
     HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension
 )
+from delft.models.preferences import SitePreferences
 
 admin.site.unregister(HierarchicalKeyword)
 admin.site.unregister(Region)
@@ -59,3 +60,20 @@ class GroupProfileExtensionAdmin(GroupProfileAdmin):
 admin.site.register(Region, RegionExtensionAdmin)
 admin.site.register(HierarchicalKeyword, HierarchicalKeywordExtensionAdmin)
 admin.site.register(GroupProfile, GroupProfileExtensionAdmin)
+
+
+class SitePreferencesAdmin(admin.ModelAdmin):
+    """Site Preferences admin."""
+
+    fieldsets = (
+        ('Landing Page', {
+            'fields': (
+                'landing_page_banner',
+                'landing_page_banner_title',
+                'landing_page_banner_description'
+            ),
+        }),
+    )
+
+
+admin.site.register(SitePreferences, SitePreferencesAdmin)
