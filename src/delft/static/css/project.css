@@ -128,7 +128,7 @@ body.project-home {
     color: #fff;
     font-size: 18px;
     line-height: 1.4;
-    padding: 3rem;
+    padding: 1.5rem 0;
 }
 
 .banner-text h2 {
@@ -722,4 +722,19 @@ form .row {
 
 .separator {
     flex-grow: 1;
+}
+
+.other-button {
+    background-color: var(--secondary);
+    border: 1px solid white var(--secondary);
+    padding: 0.5rem 1rem;
+    margin-top: 1rem !important;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.8rem !important;
+}
+
+.other-button:hover {
+    color: var(--secondary);
+    background-color: white;
 }
