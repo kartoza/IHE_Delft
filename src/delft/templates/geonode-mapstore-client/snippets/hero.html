@@ -1,8 +1,14 @@
 {% load i18n %}
-<div class="banner">
+<div class="banner"
+     style="{% if preferences.landing_page_banner %}background-image:url('{{ preferences.landing_page_banner }}')!important{% endif %}">
     <div class="container">
+        <div class="separator"></div>
         <div class="banner-text">
-            <h2>{% trans "IHE Delft Institute for Water Education" %}</h2>
+            <h2>{% trans preferences.landing_page_banner_title %}</h2>
+            <p>{% trans preferences.landing_page_banner_description|safe %}</p>
+            <a href=" https://www.un-ihe.org/what-we-do/water-and-development-partnership-programme">
+                <button class="other-button">More information about the programme</button>
+            </a>
         </div>
     </div>
 

@@ -13,3 +13,4 @@ Sphinx
 # pdb plus plus
 pdbpp
 responses
+geoserver-restconfig==2.0.9

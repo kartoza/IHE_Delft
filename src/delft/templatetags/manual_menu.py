@@ -68,44 +68,31 @@ def get_project_base_left_topbar_menu(context):
 
     return [
         {
-            "label": 'Data',
+            "label": 'Outputs',
             "type": "dropdown",
             "items": [
                 {
                     "type": "link",
-                    "href": "/catalogue/#/search/?f=dataset",
-                    "label": "Dataset"
+                    "href": "/catalogue/#/search/?f=dataset&f=document",
+                    "label": "Search Outputs"
                 },
                 {
                     "type": "link",
-                    "href": "/catalogue/#/search/?f=document",
-                    "label": "Documents"
-                } if not is_mobile else None,
-                {
-                    "type": "divider"
-                } if is_logged_in else None,
-                {
-                    "type": "link",
-                    "href": "/catalogue/#/upload/dataset",
-                    "label": "Upload Map Layers"
-                } if is_logged_in else None,
-                {
-                    "type": "link",
                     "href": "/catalogue/#/upload/document",
-                    "label": "Upload Document"
+                    "label": "Upload Output"
                 } if is_logged_in else None,
             ]
         },
-        {
-            "type": "link",
-            "href": "/catalogue/#/search/?f=map",
-            "label": "Maps"
-        },
-        {
-            "type": "link",
-            "href": "/catalogue/#/search/?f=dashboard",
-            "label": "Dashboards"
-        },
+        # {
+        #     "type": "link",
+        #     "href": "/catalogue/#/search/?f=map",
+        #     "label": "Maps"
+        # },
+        # {
+        #     "type": "link",
+        #     "href": "/catalogue/#/search/?f=dashboard",
+        #     "label": "Dashboards"
+        # },
         {
             "type": "link",
             "href": "/catalogue/#/search/?f=geostory",
