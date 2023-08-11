@@ -688,9 +688,6 @@ form .row {
 
 .gn-home-section .gn-resource-card .card-img-top {
     height: 120px;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
 }
 
 #basicGroupInfo {
@@ -768,6 +765,6 @@ form .row {
     display: none;
 }
 
-#image {
-
+#req_item {
+    margin-bottom: 1rem;
 }
