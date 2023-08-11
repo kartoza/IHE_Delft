@@ -18,20 +18,24 @@
 #
 #########################################################################
 import os
+
 from django.apps import AppConfig as BaseAppConfig
+
 
 def run_setup_hooks(*args, **kwargs):
     from django.conf import settings
     from .celeryapp import app as celeryapp
 
     LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
-    settings.TEMPLATES[0]["DIRS"].insert(0, os.path.join(LOCAL_ROOT, "templates"))
+    settings.TEMPLATES[0]["DIRS"].insert(
+        0, os.path.join(LOCAL_ROOT, "templates")
+    )
 
     if celeryapp not in settings.INSTALLED_APPS:
         settings.INSTALLED_APPS += (celeryapp,)
 
-class AppConfig(BaseAppConfig):
 
+class AppConfig(BaseAppConfig):
     name = "delft"
     label = "delft"
 
@@ -39,3 +43,4 @@ class AppConfig(BaseAppConfig):
         super(AppConfig, self).ready()
         run_setup_hooks()
         import delft.patch.hierachical_keywords
+        import delft.signals
