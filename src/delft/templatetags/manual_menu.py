@@ -16,7 +16,8 @@ def get_list_element(list_data, active_slug):
                 url=data['url'],
                 title=data['title'],
                 indicator='(Pending)' if not data['live'] else '',
-                c="data-jstree='{\"opened\":true,\"selected\":true}'" if data['slug'] == active_slug else ''
+                c="data-jstree='{\"opened\":true,\"selected\":true}'" if data[
+                                                                             'slug'] == active_slug else ''
             )
         if 'children' in data:
             element += get_list_element(data['children'], active_slug)
@@ -78,7 +79,7 @@ def get_project_base_left_topbar_menu(context):
             "items": [
                 {
                     "type": "link",
-                    "href": "/catalogue/#/search/?f=dataset&f=document",
+                    "href": "/catalogue/#/search/?f=dataset&f=document&f=geostory",
                     "label": "Search Outputs"
                 },
                 {

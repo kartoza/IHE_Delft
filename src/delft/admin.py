@@ -20,19 +20,25 @@
 from django.contrib import admin
 from geonode.base.admin import RegionAdmin, HierarchicalKeywordAdmin
 from geonode.base.models import HierarchicalKeyword, Region
+from geonode.documents.admin import DocumentAdmin, Document
+from geonode.geoapps.admin import GeoApp
 from geonode.groups.admin import GroupProfileAdmin
 from geonode.groups.models import GroupProfile
 
 from delft.models import (
-    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension
+    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension,
+    ResourceBaseExtension
 )
 from delft.models.preferences import SitePreferences
 
 admin.site.unregister(HierarchicalKeyword)
 admin.site.unregister(Region)
 admin.site.unregister(GroupProfile)
+admin.site.unregister(Document)
+admin.site.unregister(GeoApp)
 
 
+# INLINES
 class RegionExtensionInline(admin.StackedInline):
     model = RegionExtension
 
@@ -45,6 +51,11 @@ class GroupProfileExtensionInline(admin.StackedInline):
     model = GroupProfileExtension
 
 
+class ResourceBaseExtensionInline(admin.StackedInline):
+    model = ResourceBaseExtension
+
+
+# ADMINS
 class RegionExtensionAdmin(RegionAdmin):
     inlines = [RegionExtensionInline]
 
@@ -57,9 +68,19 @@ class GroupProfileExtensionAdmin(GroupProfileAdmin):
     inlines = [GroupProfileExtensionInline]
 
 
+class DocumentExtensionAdmin(DocumentAdmin):
+    inlines = [ResourceBaseExtensionInline]
+
+
+class GeoAppExtensionAdmin(DocumentAdmin):
+    inlines = [ResourceBaseExtensionInline]
+
+
 admin.site.register(Region, RegionExtensionAdmin)
 admin.site.register(HierarchicalKeyword, HierarchicalKeywordExtensionAdmin)
 admin.site.register(GroupProfile, GroupProfileExtensionAdmin)
+admin.site.register(Document, DocumentExtensionAdmin)
+admin.site.register(GeoApp, GeoAppExtensionAdmin)
 
 
 class SitePreferencesAdmin(admin.ModelAdmin):

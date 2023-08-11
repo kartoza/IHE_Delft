@@ -1,6 +1,5 @@
 from django import template
-from geonode.base.models import HierarchicalKeyword, GroupProfile
-from geonode.geoapps.models import GeoApp
+from geonode.base.models import HierarchicalKeyword, GroupProfile, ResourceBase
 
 from delft.models import (
     HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension
@@ -66,9 +65,6 @@ def get_featured_regions(context):
 
 
 @register.simple_tag(takes_context=True)
-def get_featured_geostories(context):
-    """Return featured regions."""
-    return GeoApp.objects.filter(
-        resource_type="geostory",
-        featured=True
-    )
+def get_featured_output(context):
+    """Return featured output."""
+    return ResourceBase.objects.filter(resourcebaseextension__featured=True)

@@ -1,6 +1,6 @@
 from django.db import models
 
-from geonode.base.models import HierarchicalKeyword, Region
+from geonode.base.models import HierarchicalKeyword, Region, ResourceBase
 from geonode.groups.models import GroupProfile
 
 
@@ -51,3 +51,17 @@ class GroupProfileExtension(models.Model):
 
     def __str__(self):
         return self.group_profile.title
+
+
+class ResourceBaseExtension(models.Model):
+    """Extension of GroupProfile."""
+
+    resource = models.OneToOneField(
+        ResourceBase, on_delete=models.CASCADE
+    )
+    featured = models.BooleanField(
+        default=False, help_text='Show it to homepage.'
+    )
+
+    def __str__(self):
+        return self.resource.title
