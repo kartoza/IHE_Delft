@@ -1,0 +1,18 @@
+{% extends "geonode_base.html" %}
+{% load markdownify %}
+{% load i18n %}
+{% block title %} {% trans "About" %} — {{ block.super }} {% endblock %}
+
+{% block body_outer %}
+    <div class="page-header">
+        <h2>
+            {% if preferences.about_page_title %}
+                {{ preferences.about_page_title }}
+            {% else %}
+                About
+            {% endif %}
+        </h2>
+    </div>
+    {{ preferences.about_page_content|markdownify }}
+
+{% endblock %}

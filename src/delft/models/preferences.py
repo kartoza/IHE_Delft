@@ -1,4 +1,5 @@
 from django.db import models
+from mdeditor.fields import MDTextField
 
 from delft.models.singleton import SingletonModel
 
@@ -19,6 +20,13 @@ class SitePreferences(SingletonModel):
     landing_page_banner_description = models.TextField(
         default=''
     )
+    # -----------------------------------------------
+    # ABOUT PAGE
+    # -----------------------------------------------
+    about_page_title = models.TextField(
+        default=''
+    )
+    about_page_content = MDTextField(default='')
 
     class Meta:  # noqa: D106
         verbose_name_plural = "site preferences"

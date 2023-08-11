@@ -73,6 +73,12 @@ class SitePreferencesAdmin(admin.ModelAdmin):
                 'landing_page_banner_description'
             ),
         }),
+        ('About Page', {
+            'fields': (
+                'about_page_title',
+                'about_page_content'
+            ),
+        }),
     )
 
 
