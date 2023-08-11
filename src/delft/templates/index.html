@@ -5,7 +5,7 @@
 
 {% get_parent_keywords as PARENT_KEYWORDS %}
 {% get_group_profiles as GROUP_PROFILES %}
-{% get_featured_geostories as GEOSTORIES %}
+{% get_featured_output as FEATURED_OUTPUTS %}
 
 <!DOCTYPE html>
 <html class="msgapi">
@@ -206,23 +206,23 @@
                                                 {% endif %}
 
                                                 {# GEOSTORIES #}
-                                                {% if GEOSTORIES %}
+                                                {% if FEATURED_OUTPUTS %}
                                                     <div class="gn-card-grid-container" style="min-height: auto;">
-                                                        <h1 class="explore-viewer-title">Geostories</h1>
+                                                        <h1 class="explore-viewer-title">Featured Stories</h1>
                                                         <ul>
-                                                            {% for geostory in GEOSTORIES %}
+                                                            {% for output in FEATURED_OUTPUTS %}
                                                                 <li>
                                                                     <div class="gn-resource-card gn-card-type-grid ">
-                                                                        <a class="gn-resource-card-link" href="/catalogue/#/geostory/{{ geostory.id }}"></a>
+                                                                        <a class="gn-resource-card-link" href="/catalogue/#/{{ output.resource_type }}/{{ output.id }}"></a>
                                                                         <div class="card-resource-grid">
-                                                                            <img class="card-img-top" src="{% if geostory.icon %}{{ geostory.icon.url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
+                                                                            <img class="card-img-top" src="{% if output.thumbnail_url %}{{ output.thumbnail_url }}{% else %}{% static "geonode/img/missing_thumb.png" %}{% endif %}">
                                                                             <div class="gn-resource-card-body-wrapper">
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">
                                                                                         <div>{{ geostory.title }}</div>
                                                                                     </div>
                                                                                     <div class="card-abstract">
-                                                                                        <p class="card-text gn-card-description">{% if geostory.abstract %}{{ geostory.abstract|safe }}{% else %}No description{% endif %}</p>
+                                                                                        <p class="card-text gn-card-description">{% if output.abstract %}{{ output.abstract|safe }}{% else %}No description{% endif %}</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

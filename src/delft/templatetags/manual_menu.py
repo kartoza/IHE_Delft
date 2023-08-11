@@ -2,6 +2,9 @@ from django import template
 from django.utils.safestring import mark_safe
 from geonode.base.models import Configuration
 from geonode_mapstore_client.templatetags.get_menu_json import get_user_menu
+
+from delft.utils import is_user_able_to_add
+
 register = template.Library()
 
 
@@ -13,7 +16,8 @@ def get_list_element(list_data, active_slug):
                 url=data['url'],
                 title=data['title'],
                 indicator='(Pending)' if not data['live'] else '',
-                c="data-jstree='{\"opened\":true,\"selected\":true}'" if data['slug'] == active_slug else ''
+                c="data-jstree='{\"opened\":true,\"selected\":true}'" if data[
+                                                                             'slug'] == active_slug else ''
             )
         if 'children' in data:
             element += get_list_element(data['children'], active_slug)
@@ -66,6 +70,8 @@ def get_project_base_left_topbar_menu(context):
     is_mobile = _is_mobile_device(context)
     is_logged_in = _is_logged_in(context)
 
+    user = context.get('request').user
+    is_able_to_add = is_user_able_to_add(user)
     return [
         {
             "label": 'Outputs',
@@ -73,26 +79,16 @@ def get_project_base_left_topbar_menu(context):
             "items": [
                 {
                     "type": "link",
-                    "href": "/catalogue/#/search/?f=dataset&f=document",
+                    "href": "/catalogue/#/search/?f=dataset&f=document&f=geostory",
                     "label": "Search Outputs"
                 },
                 {
                     "type": "link",
                     "href": "/catalogue/#/upload/document",
                     "label": "Upload Output"
-                } if is_logged_in else None,
+                } if is_logged_in and is_able_to_add else None,
             ]
         },
-        # {
-        #     "type": "link",
-        #     "href": "/catalogue/#/search/?f=map",
-        #     "label": "Maps"
-        # },
-        # {
-        #     "type": "link",
-        #     "href": "/catalogue/#/search/?f=dashboard",
-        #     "label": "Dashboards"
-        # },
         {
             "type": "link",
             "href": "/catalogue/#/search/?f=geostory",
@@ -127,7 +123,7 @@ def get_project_base_right_topbar_menu(context):
             {
                 "type": "link",
                 "href": "/groups/",
-                "label": "Group profiles"
+                "label": "Project profiles"
             }
         ]
     }
@@ -149,7 +145,7 @@ def get_project_base_right_topbar_menu(context):
             {
                 "type": "link",
                 "href": "/groups/create/",
-                "label": "Create group profile"
+                "label": "Create project profile"
             } if user.is_superuser else None,
         ])
     return [

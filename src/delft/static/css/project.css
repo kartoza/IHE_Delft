@@ -764,3 +764,7 @@ form .row {
 #basicCategoryInfo {
     display: none;
 }
+
+#req_item {
+    margin-bottom: 1rem;
+}

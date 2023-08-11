@@ -2,7 +2,7 @@
 {% load bootstrap_tags %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Create Group" %}{% endblock %}
+{% block head_title %}{% trans "Create Project" %}{% endblock %}
 {% block body_class %}groups create{% endblock %}
 
 {% block body %}
@@ -14,7 +14,7 @@
     </style>
     <div class="block">
       <div class="col-md-10">
-        <h2 class="page-title">{% block body_page_title %}{% trans "Create a Group Profile" %}{% endblock %}</h2>
+        <h2 class="page-title">{% block body_page_title %}{% trans "Create a Project Profile" %}{% endblock %}</h2>
         {% if errors %}
           <div id="errors">
             {% for error in errors %}
