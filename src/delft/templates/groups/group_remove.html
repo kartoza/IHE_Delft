@@ -10,7 +10,7 @@
     <form action="{% url "group_remove" group.slug %}" method="POST">
       <h2>
         {% blocktrans with group.title as group_title %}
-          Are you sure you want to remove the group: {{ group_title }}?
+          Are you sure you want to remove the project: {{ group_title }}?
         {% endblocktrans %}
       </h2>
       {% csrf_token %}

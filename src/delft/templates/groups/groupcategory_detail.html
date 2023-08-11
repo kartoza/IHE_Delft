@@ -21,14 +21,14 @@
   <div class="col-md-4">
     <ul class="list-group">
       {% if request.user.is_staff or request.user.is_superuser %}
-      <li class="list-group-item"><a href="{% url "group_category_update" object.slug %}">{% trans "Edit Group Category Details" %}</a></li>
+      <li class="list-group-item"><a href="{% url "group_category_update" object.slug %}">{% trans "Edit Project Category Details" %}</a></li>
       {% endif %}
     </ul>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <h4>{% trans "Groups" %}</h4>
+    <h4>{% trans "Projects" %}</h4>
     <div class="tab-content paginate paginate-auto" id="search-content">
     {% include 'groups/_group_profile_list_item.html' %}
     </div>
