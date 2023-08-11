@@ -123,7 +123,7 @@ def get_project_base_right_topbar_menu(context):
             {
                 "type": "link",
                 "href": "/groups/",
-                "label": "Group profiles"
+                "label": "Project profiles"
             }
         ]
     }
@@ -145,7 +145,7 @@ def get_project_base_right_topbar_menu(context):
             {
                 "type": "link",
                 "href": "/groups/create/",
-                "label": "Create group profile"
+                "label": "Create project profile"
             } if user.is_superuser else None,
         ])
     return [
