@@ -7,7 +7,6 @@ x-common-django:
   build:
     context: ../
     dockerfile: deployment/docker/Dockerfile
-    target: prod
   restart: on-failure
   env_file:
     - .env
@@ -158,9 +157,9 @@ services:
     entrypoint: [ ]
     build:
       context: ../
-      dockerfile: deployment/docker/Dockerfile
-      target: dev
+      dockerfile: deployment/docker/Dockerfile-Dev
     depends_on:
+      - django
       - geoserver
       - db
       - celery
