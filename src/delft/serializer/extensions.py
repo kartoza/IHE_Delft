@@ -4,8 +4,7 @@ from geonode.base.api.serializers import (
     HierarchicalKeywordSerializer, GroupProfileSerializer
 )
 from geonode.base.models import HierarchicalKeyword
-from geonode.groups.models import (
-    GroupProfile)
+from geonode.groups.models import GroupProfile
 from geonode.security.utils import get_resources_with_perms
 from rest_framework import serializers
 from rest_framework.reverse import NoReverseMatch

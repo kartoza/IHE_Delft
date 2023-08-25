@@ -79,10 +79,6 @@
         {% endblock %}
     </head>
     <body class="msgapi ms2" data-ms2-container="ms2">
-        <a href="/catalogue/#/search/" class="floating-button">
-            <button>Find what you're looking for</button>
-        </a>
-
         <div class="gn-page-wrapper {% if request.user_agent.is_mobile %}gn-mobile{% else %}gn-desktop{% endif %}">
             <div class="gn-theme gn-homepage">
 
@@ -131,7 +127,7 @@
                                                                                         <div>{{ profile.title }}</div>
                                                                                     </div>
                                                                                     <div class="card-abstract">
-                                                                                        <p class="card-text gn-card-description">{% if profile.description %}{{ profile.description }}{% else %}No description{% endif %}</p>
+                                                                                        <p class="card-text gn-card-description">{% if profile.description %}{{ profile.description }}{% else %}{% endif %}</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -162,7 +158,7 @@
                                                                                             <div>{{ keyword.name }}</div>
                                                                                         </div>
                                                                                         <div class="card-abstract">
-                                                                                            <p class="card-text gn-card-description">{% if keyword.hierarchicalkeywordextension.description %}{{ keyword.hierarchicalkeywordextension.description }}{% else %}No description{% endif %}</p>
+                                                                                            <p class="card-text gn-card-description">{% if keyword.hierarchicalkeywordextension.description %}{{ keyword.hierarchicalkeywordextension.description }}{% else %}{% endif %}</p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -193,7 +189,7 @@
                                                                                         <div>{{ region.region.name }}</div>
                                                                                     </div>
                                                                                     <div class="card-abstract">
-                                                                                        <p class="card-text gn-card-description">{% if region.description %}{{ region.description }}{% else %}No description{% endif %}</p>
+                                                                                        <p class="card-text gn-card-description">{% if region.description %}{{ region.description }}{% else %}{% endif %}</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -222,7 +218,7 @@
                                                                                         <div>{{ geostory.title }}</div>
                                                                                     </div>
                                                                                     <div class="card-abstract">
-                                                                                        <p class="card-text gn-card-description">{% if output.abstract %}{{ output.abstract|safe }}{% else %}No description{% endif %}</p>
+                                                                                        <p class="card-text gn-card-description">{% if output.abstract %}{{ output.abstract|safe }}{% else %}{% endif %}</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
