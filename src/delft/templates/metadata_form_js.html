@@ -2,11 +2,29 @@
 {% load static %}
 <script type="text/javascript">
 {% autoescape off %}
+
+    {# DELFT Specified #}
     {% if not user.is_superuser %}
         $('#id_resource-featured').closest('div').hide()
     {% endif %}
     $('#id_resource-links').closest('div').hide()
     $('#id_resource-owner').closest('.panel-default').hide()
+    $('#id_resource-regions').find('optgroup[label="Global"]').remove()
+    $('#id_resource-regions').find('optgroup').each(function () {
+      let hasChild = false
+      $(this).find('option').each(function (){
+        if($(this).data('section').includes('/')){
+          hasChild = true
+        }
+      })
+      if (hasChild) {
+        $(this).find('option').each(function (){
+          if (!$(this).data('section').includes('/')) {
+            $(this).remove()
+          }
+        })
+      }
+    })
 
     var select_button_active = false;
 
@@ -83,7 +101,7 @@
       $('#profileCompleteness .progress-bar').html(parseFloat(((completeness)*100).toFixed(0)) + ' %').width(parseFloat(((completeness)*100).toFixed(2)) + '%');
       $('#profileCompleteness .completed').toggle(completeness === 1);
       $('#profileCompleteness .not-completed').toggle(completeness !== 1);
-      
+
       var mandatoryMissing = $('#mandatory').find('.input-empty:not([class^="select2"])').length > 0;
           if (mandatoryMissing) {
             var not_tinymce = true
@@ -213,7 +231,7 @@
     $(document).ready(function() {
         $('.has-external-popover').each(function(){
                 var help_text = $(this).attr("data-content");
-                
+
                 // Removes the second help icon from select2 fields
                 if (help_text) {
                     var spanPopoverText = $('<span>', { class: 'external-popover', 'data-content': help_text  }).append("<strong><i class='fa fa fa-question-circle fa-1x'></i></strong>");
@@ -257,7 +275,7 @@
             // display error status for token fields if not completed
             $(target).toggleClass("input-empty", empty);
             if (target.id.startsWith('id_tkeywords')) {
-                $("#" + target.id).closest("p").toggleClass("has-error", empty);   
+                $("#" + target.id).closest("p").toggleClass("has-error", empty);
               }
           }
           var imgMissing = $('img#image').attr('src');
@@ -273,7 +291,7 @@
         {% block target %}
           if(target.id === 'category_form' ||
              target.id === 'id_resource-regions' ||
-             target.id === 'id_resource-group' || 
+             target.id === 'id_resource-group' ||
              target.id === 'id_resource-date' ||
              target.id === 'id_resource-links' || {{UI_REQUIRED_FIELDS}}.includes(target.id)
           ) {
@@ -398,12 +416,12 @@
                         empty--;
                     }
                     setInputEmpty(e_target, false);
-                    if (!!$(e_target).closest('.date').length) { 
+                    if (!!$(e_target).closest('.date').length) {
                         $(e_target).parent().parent().find(".mandatory-warning").remove();
                     } else {
                         $(e_target).parent().find(".mandatory-warning").remove();
                     }
-                    
+
                 }
             }
 
@@ -442,7 +460,7 @@
                     $("#settings_time_series").hide();
                 }
             });
-            
+
             $("#id_timeseries-presentation").change(function() {
                 if(this.value != 'LIST') {
                     $("#precision_value").show();
@@ -456,7 +474,7 @@
         $('#completeness-hints .mandatory-hint').click(getTab.bind(null, 1));
         $('#completeness-hints .advanced-hint').click(getTab.bind(null, 2));
         {% endblock hints %}
-        
+
 
         {% block trigger_onInputChange %}
 
@@ -470,9 +488,9 @@
         if (selection  !== null) {
             selection.onchange=onInputChange
         }
-        
+
         {{REQ_THESAURI}}.forEach(element => document.querySelector('select[name="'+ element + '"]').onchange=onInputChange);
-        
+
         // workaround to trigger the change in advanced metadata editing
         // otherwise will remain not-required untill a change on the item
         for (item in {{REQ_THESAURI}}) {
@@ -608,7 +626,7 @@
                 validateRequiredInput()
             }
         });
-        
+
         function validateRequiredInput() {
             var errors = ['{% trans "Following items are required:" %}']
             $( ':input[required]').each( function () {
@@ -838,9 +856,9 @@
       {% endif %}
         $('.has-popover').popover({'trigger':'hover'});
 
-        /** 
+        /**
         NOTE: This is commented as it needs updating to work with select2 and autocomlete light.
-        
+
         var params = typeof FILTER_TYPE == 'undefined' ? {} : {'type': FILTER_TYPE};
         $.ajax({
             url: {% url 'h_keywords_api' %},
@@ -969,6 +987,6 @@
             return kws;
         };
 
-    }); 
+    });
 {% endautoescape %}
 </script>
