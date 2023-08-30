@@ -37,6 +37,7 @@ def get_download_response(request, docid, attachment=False):
     and an http response if they have no permissions to download it.
     """
     document = get_object_or_404(Document, pk=docid)
+    print(f'Download response')
     print(f'1 - {document.id}')
     logger.debug(f'1 - {document.id}')
 
