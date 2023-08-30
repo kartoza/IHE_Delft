@@ -128,7 +128,7 @@ body.project-home {
     color: #fff;
     font-size: 18px;
     line-height: 1.4;
-    padding: 1.5rem 0;
+    padding: 1.5rem 22px 1.5rem 11px;
 }
 
 .banner-text h2 {
@@ -678,7 +678,7 @@ form .row {
 /* -------------- HOME TAGS --------------- */
 .gn-home-section .gn-card-grid li {
     padding: 0.5rem !important;
-    width: 25%;
+    width: 33%;
 }
 
 .gn-home-section .gn-card-grid h1 {
@@ -687,7 +687,7 @@ form .row {
 }
 
 .gn-home-section .gn-resource-card .card-img-top {
-    height: 153px;
+    height: 205px;
 }
 
 #basicGroupInfo {
