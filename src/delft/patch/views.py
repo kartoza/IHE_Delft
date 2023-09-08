@@ -72,13 +72,16 @@ def get_download_response(request, docid, attachment=False):
         logger.debug(f'8 - {_file.size}')
         print(f'9 - {filename}.{document.extension}')
         logger.debug(f'9 - {filename}.{document.extension}')
-        print(f'10 - {request}')
+        print(f'10 - {request.headers}')
         logger.debug(f'10 - {request}')
-        return DownloadResponse(
+        response = DownloadResponse(
             _file.file,
             basename=f'{filename}.{document.extension}',
             attachment=attachment
         )
+        print(f'11 - {response.headers}')
+        logger.debug(response.headers)
+        return response
     return HttpResponse(
         "File is not available",
         status=404
