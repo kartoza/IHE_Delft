@@ -8,7 +8,9 @@
         $('#id_resource-featured').closest('div').hide()
     {% endif %}
     $('#id_resource-links').closest('div').hide()
+    $('#id_resource-restriction_code_type').closest('div').hide()
     $('#id_resource-owner').closest('.panel-default').hide()
+    $('#id_resource-license').attr('required', 'required');
     $('#id_resource-regions').find('optgroup[label="Global"]').each(function () {
       $(this).find('option').each(function (){
         if ($(this).html().toLowerCase() !== 'global') {
