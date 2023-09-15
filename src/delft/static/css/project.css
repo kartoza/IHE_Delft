@@ -758,3 +758,8 @@ form .row {
 #mdinfo .col-lg-4 > div {
     margin-bottom: 1rem;
 }
+
+#id_resource-attribution.input-empty {
+    border-color: #dddddd !important;
+    border-color: var(--gn-main-border-color, #dddddd) !important;
+}

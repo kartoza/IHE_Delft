@@ -3,7 +3,7 @@
 <script type="text/javascript">
 {% autoescape off %}
 
-    {# DELFT Specified #}
+    {# TODO: DELFT Specified #}
     {% if not user.is_superuser %}
         $('#id_resource-featured').closest('div').hide()
     {% endif %}
@@ -33,6 +33,7 @@
         })
       }
     })
+    {# ------------------ #}
 
     var select_button_active = false;
 
@@ -65,6 +66,12 @@
     var ui_mandatory_fields = {{ UI_MANDATORY_FIELDS }};
 
     var updateWizard = function() {
+        {# TODO: Delft specified #}
+        $('#id_resource-constraints_other').closest('div').find('.mandatory-warning').remove();
+        $('#id_resource-data_quality_statement').closest('div').find('.mandatory-warning').remove();
+        $('#id_resource-attribution').closest('div').find('.mandatory-warning').remove();
+        {# ------------------- #}
+
       var activeTab = $("#edit-metadata .wizard--progress li.is-active");
       var first = $("#edit-metadata .wizard--progress li:first-child");
       var last = $("#edit-metadata .wizard--progress li:last-child");
