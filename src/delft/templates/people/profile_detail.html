@@ -172,12 +172,15 @@
       <li class="list-group-item"><a href="{% url "profile_edit" profile.username %}"><i class="fa fa-edit"></i> {% trans "Edit profile" %}</a></li>
     </ul>
     {% endif %}
-    <ul class="list-group">
-      <li class="list-group-item"><a href="{% url "user-activity" profile.username %}"><i class="fa fa-fire"></i> {% trans "User Activities" %}</a></li>
-    </ul>
+    {% if user.is_authenticated and user == profile or user.is_superuser or user.is_staff %}
+        <ul class="list-group">
+          <li class="list-group-item"><a href="{% url "user-activity" profile.username %}"><i class="fa fa-fire"></i> {% trans "User Activities" %}</a></li>
+        </ul>
+    {% endif %}
   {% endif %}
 </div>
 
+{% if user.is_authenticated and user == profile or user.is_superuser or user.is_staff %}
 <div class="col-xs-12 col-md-9">
   <h4>{% trans "Resources" %}</h4>
   <div class="col-md-12">
@@ -193,6 +196,7 @@
     {% include 'search/_pagination.html' %}
   </div>
 </div>
+{% endif %}
 
 {% endblock %}
 
