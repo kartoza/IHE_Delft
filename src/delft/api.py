@@ -1,5 +1,9 @@
 import logging
 
+from delft.serializer import (
+    GroupProfileSerializerWithCount,
+    HierarchicalKeywordSerializerByParent
+)
 from dynamic_rest.filters import DynamicFilterBackend, DynamicSortingFilter
 from geonode.base.api.filters import (
     DynamicSearchFilter, ExtentFilter, FavoriteFilter
@@ -10,12 +14,11 @@ from geonode.base.api.views import (
 )
 from geonode.base.models import HierarchicalKeyword
 from geonode.base.views import HierarchicalKeywordAutocomplete
-from rest_framework.filters import BaseFilterBackend
-
-from delft.serializer import (
-    GroupProfileSerializerWithCount,
-    HierarchicalKeywordSerializerByParent
+from geonode.documents.api.views import (
+    DocumentViewSet, DocumentPermissionsFilter
 )
+from geonode.groups.models import GroupProfile
+from rest_framework.filters import BaseFilterBackend
 
 logger = logging.getLogger(__name__)
 
@@ -81,11 +84,38 @@ class KeywordsFilter(BaseFilterBackend):
         return queryset
 
 
+class ByProfileFilter(BaseFilterBackend):
+    """Filter resource by accessed profile."""
+
+    def filter_queryset(self, request, queryset, view):
+        for key in request.query_params.keys():
+            if key == 'by-profile':
+                if not request.user.is_staff:
+                    print(GroupProfile.groups_for_user(
+                            request.user
+                        ))
+                    queryset = queryset.filter(
+                        group__in=GroupProfile.groups_for_user(
+                            request.user
+                        ).values_list('group')
+                    )
+        return queryset
+
+
 class ResourceBaseViewSetWithKeywords(ResourceBaseViewSet):
     """API endpoint that allows base resources to be viewed or edited."""
 
     filter_backends = [
         DynamicFilterBackend, DynamicSortingFilter, DynamicSearchFilter,
         ExtentFilter, ResourceBasePermissionsFilter, FavoriteFilter,
-        KeywordsFilter
+        KeywordsFilter, ByProfileFilter
+    ]
+
+
+class DocumentViewSetWithProfile(DocumentViewSet):
+    """API endpoint that allows base resources to be viewed or edited."""
+
+    filter_backends = [
+        DynamicFilterBackend, DynamicSortingFilter, DynamicSearchFilter,
+        ExtentFilter, DocumentPermissionsFilter, ByProfileFilter
     ]

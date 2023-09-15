@@ -266,7 +266,14 @@
                         setCookie('hideBanner', true, 7);
                         $('.open-banner').show();
                     });
-
+                    function updateBannerSize() {
+                        const height = $('.banner').width() * 2 / 7;
+                        $('.banner').height(height);
+                    }
+                    window.addEventListener('resize', function(event) {
+                        updateBannerSize()
+                    }, true);
+                    updateBannerSize()
                     function openBanner() {
                         delete_cookie('hideBanner');
                         console.log('banner')

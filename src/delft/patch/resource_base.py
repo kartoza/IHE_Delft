@@ -19,6 +19,11 @@ def save_parent(query, region: Region):
 @receiver(post_save, sender=Map)
 def update_regions(sender, instance, **kwargs):
     try:
+        try:
+            region_global = Region.objects.get(code='GLO')
+            instance.regions.add(region_global)
+        except Region.DoesNotExist:
+            pass
         for region in instance.regions.all():
             save_parent(instance.regions, region)
     except Exception:

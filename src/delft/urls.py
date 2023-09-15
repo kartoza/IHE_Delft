@@ -27,6 +27,7 @@ from delft.api import (
     HierarchicalKeywordAutocompleteByParent,
     HierarchicalKeywordViewSetByParent,
     ResourceBaseViewSetWithKeywords,
+    DocumentViewSetWithProfile
 )
 
 router = routers.DynamicRouter()
@@ -34,6 +35,7 @@ router.register(r'groups', GroupViewSetWithCount, 'group-profiles')
 router.register(
     r'resources', ResourceBaseViewSetWithKeywords, 'base-resources'
 )
+router.register(r'documents', DocumentViewSetWithProfile, 'documents')
 router.register(
     r'keywords', HierarchicalKeywordViewSetByParent, 'keywords'
 )
