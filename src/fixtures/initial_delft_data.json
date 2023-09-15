@@ -66,7 +66,7 @@
     "model": "base.hierarchicalkeyword",
     "pk": 6,
     "fields": {
-      "name": "Partnerships & Joint learning: Inclusive networks & cross-learning",
+      "name": "Partnerships & Joint learning",
       "slug": "partnerships-joint-learning",
       "path": "000H0009",
       "depth": 2,
@@ -77,7 +77,7 @@
     "model": "base.hierarchicalkeyword",
     "pk": 7,
     "fields": {
-      "name": "Research & Advocacy: Interdisciplinary action-research",
+      "name": "Research & Advocacy",
       "slug": "research-advocacy",
       "path": "000H000B",
       "depth": 2,
@@ -88,7 +88,7 @@
     "model": "base.hierarchicalkeyword",
     "pk": 8,
     "fields": {
-      "name": "Education & Training: Curricula & training courses",
+      "name": "Education & Training",
       "slug": "education-training",
       "path": "000H0005",
       "depth": 2,
@@ -99,7 +99,7 @@
     "model": "base.hierarchicalkeyword",
     "pk": 9,
     "fields": {
-      "name": "Institutional Strengthening: Education & training for employees in the water sectors",
+      "name": "Institutional Strengthening",
       "slug": "institutional-strengthening",
       "path": "000H0007",
       "depth": 2,
