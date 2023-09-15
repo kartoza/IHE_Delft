@@ -1,13 +1,15 @@
 {% extends "groups/group_base.html" %}
 {% load bootstrap_tags %}
 {% load i18n %}
+{% load static %}
 
 {% block head_title %}{% trans "Create Project" %}{% endblock %}
 {% block body_class %}groups update{% endblock %}
 
 {% block body %}
+    <script src="{% static "lib/js/jquery.min.js" %}"></script>
      <div class="block">
-        <div class="col-md-10">
+        <div class="col-md-12">
           <h2 class="page-title">{% trans "Update Project" %}</h2>
           {% if errors %}
             <div id="errors">
@@ -30,5 +32,10 @@
             </div>
         </div>
     </div>
-    
+
+    {# TODO: Delft Specified #}
+    <script type="text/javascript">
+        $("#id_title").attr('maxlength', 150)
+        $("#id_title").after(`<p class="help-block">Max length for title is 150.</p>`)
+    </script>
 {% endblock %}

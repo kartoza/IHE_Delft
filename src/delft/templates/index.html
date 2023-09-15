@@ -215,7 +215,18 @@
                                                                             <div class="gn-resource-card-body-wrapper">
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">
-                                                                                        <div>{{ output.title }}</div>
+                                                                                        <div>
+                                                                                            {% if output.resource_type == 'map' %}
+                                                                                                <i class="fa fa-map"></i>
+                                                                                            {% elif output.resource_type == 'dataset' %}
+                                                                                                <i class="fa fa-database"></i>
+                                                                                            {% elif output.resource_type == 'document' %}
+                                                                                                <i class="fa fa-file"></i>
+                                                                                            {% elif output.resource_type == 'geostory' %}
+                                                                                                <i class="fa fa-book"></i>
+                                                                                            {% endif %}
+                                                                                            {{ output.title }}
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="card-abstract">
                                                                                         <p class="card-text gn-card-description">{% if output.abstract %}{{ output.abstract|safe }}{% else %}{% endif %}</p>
@@ -266,7 +277,14 @@
                         setCookie('hideBanner', true, 7);
                         $('.open-banner').show();
                     });
-
+                    function updateBannerSize() {
+                        const height = $('.banner').width() * 2 / 7;
+                        $('.banner').height(height);
+                    }
+                    window.addEventListener('resize', function(event) {
+                        updateBannerSize()
+                    }, true);
+                    updateBannerSize()
                     function openBanner() {
                         delete_cookie('hideBanner');
                         console.log('banner')

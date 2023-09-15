@@ -1,11 +1,13 @@
 {% extends "groups/group_base.html" %}
 {% load bootstrap_tags %}
 {% load i18n %}
+{% load static %}
 
 {% block head_title %}{% trans "Create Project" %}{% endblock %}
 {% block body_class %}groups create{% endblock %}
 
 {% block body %}
+    <script src="{% static "lib/js/jquery.min.js" %}"></script>
     <style>
         #div_id_keywords,
         #div_id_categories {
@@ -13,7 +15,7 @@
         }
     </style>
     <div class="block">
-      <div class="col-md-10">
+      <div class="col-md-12">
         <h2 class="page-title">{% block body_page_title %}{% trans "Create a Project Profile" %}{% endblock %}</h2>
         {% if errors %}
           <div id="errors">
@@ -37,4 +39,9 @@
         </div>
     </div>
 
+    {# TODO: Delft Specified #}
+    <script type="text/javascript">
+        $("#id_title").attr('maxlength', 150)
+        $("#id_title").after(`<p class="help-block">Max length for title is 150.</p>`)
+    </script>
 {% endblock %}

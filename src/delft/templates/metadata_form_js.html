@@ -3,13 +3,21 @@
 <script type="text/javascript">
 {% autoescape off %}
 
-    {# DELFT Specified #}
+    {# TODO: DELFT Specified #}
     {% if not user.is_superuser %}
         $('#id_resource-featured').closest('div').hide()
     {% endif %}
     $('#id_resource-links').closest('div').hide()
+    $('#id_resource-restriction_code_type').closest('div').hide()
     $('#id_resource-owner').closest('.panel-default').hide()
-    $('#id_resource-regions').find('optgroup[label="Global"]').remove()
+    $('#id_resource-license').attr('required', 'required');
+    $('#id_resource-regions').find('optgroup[label="Global"]').each(function () {
+      $(this).find('option').each(function (){
+        if ($(this).html().toLowerCase() !== 'global') {
+            $(this).remove()
+        }
+      })
+    })
     $('#id_resource-regions').find('optgroup').each(function () {
       let hasChild = false
       $(this).find('option').each(function (){
@@ -25,6 +33,7 @@
         })
       }
     })
+    {# ------------------ #}
 
     var select_button_active = false;
 
@@ -57,6 +66,12 @@
     var ui_mandatory_fields = {{ UI_MANDATORY_FIELDS }};
 
     var updateWizard = function() {
+        {# TODO: Delft specified #}
+        $('#id_resource-constraints_other').closest('div').find('.mandatory-warning').remove();
+        $('#id_resource-data_quality_statement').closest('div').find('.mandatory-warning').remove();
+        $('#id_resource-attribution').closest('div').find('.mandatory-warning').remove();
+        {# ------------------- #}
+
       var activeTab = $("#edit-metadata .wizard--progress li.is-active");
       var first = $("#edit-metadata .wizard--progress li:first-child");
       var last = $("#edit-metadata .wizard--progress li:last-child");

@@ -1,9 +1,8 @@
-from django import template
-from geonode.base.models import HierarchicalKeyword, GroupProfile, ResourceBase
-
 from delft.models import (
     HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension
 )
+from django import template
+from geonode.base.models import HierarchicalKeyword, GroupProfile, ResourceBase
 
 register = template.Library()
 
@@ -67,4 +66,6 @@ def get_featured_regions(context):
 @register.simple_tag(takes_context=True)
 def get_featured_output(context):
     """Return featured output."""
-    return ResourceBase.objects.filter(resourcebaseextension__featured=True)
+    return ResourceBase.objects.filter(
+        resourcebaseextension__featured=True
+    ).order_by('title')
