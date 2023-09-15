@@ -215,7 +215,18 @@
                                                                             <div class="gn-resource-card-body-wrapper">
                                                                                 <div class="card-body">
                                                                                     <div class="card-title">
-                                                                                        <div>{{ output.title }}</div>
+                                                                                        <div>
+                                                                                            {% if output.resource_type == 'map' %}
+                                                                                                <i class="fa fa-map"></i>
+                                                                                            {% elif output.resource_type == 'dataset' %}
+                                                                                                <i class="fa fa-database"></i>
+                                                                                            {% elif output.resource_type == 'document' %}
+                                                                                                <i class="fa fa-file"></i>
+                                                                                            {% elif output.resource_type == 'geostory' %}
+                                                                                                <i class="fa fa-book"></i>
+                                                                                            {% endif %}
+                                                                                            {{ output.title }}
+                                                                                        </div>
                                                                                     </div>
                                                                                     <div class="card-abstract">
                                                                                         <p class="card-text gn-card-description">{% if output.abstract %}{{ output.abstract|safe }}{% else %}{% endif %}</p>
