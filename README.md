@@ -1,5 +1,5 @@
-![Image Tag](https://img.shields.io/badge/Staging%20Image%20Tag:-0.0.1--8b5028d--sta-blue.svg)
-![Jenkins Status](https://img.shields.io/badge/Staging%20Jenkins%20Build%20Status:-SUCCESS-green.svg)
+![Image Tag](https://img.shields.io/badge/Staging%20Image%20Tag:-0.0.1--0894e5e--sta-blue.svg)
+![Jenkins Status](https://img.shields.io/badge/Staging%20Jenkins%20Build%20Status:-FAILURE-red.svg)
 
 # IHE_Delft
 
