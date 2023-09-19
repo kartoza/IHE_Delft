@@ -86,3 +86,9 @@ def metadata_regions(context, resource):
                 [reg.name for reg in region.get_ancestors()] + [region.name]
             )
     return regions
+
+
+@register.simple_tag(takes_context=True)
+def replace_str(context, str, target_char, out_char):
+    """Replace string."""
+    return str.replace(target_char, out_char)

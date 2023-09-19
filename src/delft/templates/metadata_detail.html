@@ -300,7 +300,8 @@
         {% block maintenance_frequency %}
         {% if resource.maintenance_frequency %}
         <dt>{% trans "Maintenance Frequency" %}</dt>
-        <dd>{{ resource.maintenance_frequency_title }}</dd>
+        {% replace_str resource.maintenance_frequency_title 'Data' 'Output' as maintenance_frequency_title %}
+        <dd>{{ maintenance_frequency_title }}</dd>
         {% endif %}
         {% endblock maintenance_frequency %}
 
