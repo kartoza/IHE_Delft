@@ -86,18 +86,36 @@
         {% endif %}
         {% endblock display_type %}
 
-        {% block keyword_list %}
-          {% if resource.keywords.count > 0 or resource.tkeywords.count > 0 %}
-            <dt>{% trans "Keywords" %}</dt>
-            <dd itemprop="keywords">
+        {# TODO : Delft specified #}
+        {% keywords resource as KEYWORDS %}
+        {% for key, value in KEYWORDS.items %}
+            <dt>{{ key }}</dt>
+            <dd>
                 <ul>
-                    {% for keyword in resource.keywords.all %}
+                    {% for keyword in value %}
                     <li>
                         <span itemscope itemtype="http://schema.org/Text">
                         {{ keyword.name| safe }}
                         </span>
                     </li>
                     {% endfor %}
+                </ul>
+            </dd>
+        {% endfor %}
+        {% block keyword_list %}
+          {% if resource.tkeywords.count > 0 %}
+            <dt>{% trans "Keywords" %}</dt>
+            <dd itemprop="keywords">
+                <ul>
+                    {# TODO : Delft specified #}
+                    {#  Removed #}
+{#                    {% for keyword in resource.keywords.all %}#}
+{#                    <li>#}
+{#                        <span itemscope itemtype="http://schema.org/Text">#}
+{#                        {{ keyword.name| safe }}#}
+{#                        </span>#}
+{#                    </li>#}
+{#                    {% endfor %}#}
                     {% for tid in resource.tkeywords.all|get_unique_thesaurus_set %}
                     <li>{{ tid|get_thesaurus_translation_by_id }}
                         {% for tkeywords in resource.tkeywords.all %}

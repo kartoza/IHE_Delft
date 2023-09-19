@@ -92,3 +92,18 @@ def metadata_regions(context, resource):
 def replace_str(context, str, target_char, out_char):
     """Replace string."""
     return str.replace(target_char, out_char)
+
+
+@register.simple_tag(takes_context=True)
+def keywords(context, resource):
+    """Return resource keywords in dict."""
+    output = {}
+    for keyword in resource.keywords.all():
+        group_name = 'Keywords'
+        parent = keyword.get_parent()
+        if parent and parent.name:
+            group_name = parent.name
+        if group_name not in output:
+            output[group_name] = []
+        output[group_name].append(keyword)
+    return output
