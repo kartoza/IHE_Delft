@@ -278,8 +278,14 @@
                         $('.open-banner').show();
                     });
                     function updateBannerSize() {
-                        const height = $('.banner').width() * 2 / 7;
-                        $('.banner').height(height);
+                        let height = $('.banner').width() * 2 / 7;
+                        console.log(height)
+                        console.log($('.banner-text').height() + 10)
+                        if (height > ($('.banner-text').height() + 10)) {
+                            $('.banner').height(height);
+                        } else {
+                            $('.banner').height('auto');
+                        }
                     }
                     window.addEventListener('resize', function(event) {
                         updateBannerSize()

@@ -108,7 +108,7 @@ body.project-home {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 30rem;
+    min-height: 30rem;
 }
 
 .banner .container {
@@ -150,7 +150,7 @@ h1, h2, h5 {
 }
 
 .banner-text a:hover {
-    color: #f18903;
+    color: white;
     text-decoration: underline;
 }
 
@@ -725,16 +725,19 @@ form .row {
 }
 
 .other-button {
+    margin-top: 1rem !important;
+}
+
+.other-button button {
     background-color: var(--secondary);
     border: 1px solid var(--secondary);
     padding: 0.5rem 1rem;
-    margin-top: 1rem !important;
     color: white;
     transition: background-color 0.3s, color 0.3s;
     font-size: 1rem !important;
 }
 
-.other-button:hover {
+.other-button button:hover {
     color: var(--secondary);
     background-color: white;
 }
@@ -745,6 +748,10 @@ form .row {
 
 #req_item {
     margin-bottom: 1rem;
+}
+
+.msgapi .gn-resource-card {
+    height: 100%;
 }
 
 .msgapi .gn-resource-card .card-text {
