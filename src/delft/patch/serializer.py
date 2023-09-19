@@ -1,20 +1,29 @@
-from geonode.base.api.serializers import SimpleRegionSerializer
-from geonode.base.models import Region
+from geonode.base.api.serializers import (
+    SimpleRegionSerializer, ResourceBaseSerializer
+)
 
 
-def get_parent(instance: Region):
-    parents = get_parent(instance.parent) if instance.parent else []
-    return [{
-        'code': instance.code,
-        'name': instance.name,
-    }] + parents
-
-
-def new_to_representation(self, instance):
+def region_to_representation(self, instance):
     data = super(SimpleRegionSerializer, self).to_representation(instance)
-    data['parents'] = get_parent(instance.parent) if instance.parent else []
-    data['parents'].reverse()
+    data['parents'] = [{
+        'code': parent.code,
+        'name': parent.name,
+    } for parent in instance.get_ancestors()]
     return data
 
 
-SimpleRegionSerializer.to_representation = new_to_representation
+SimpleRegionSerializer.to_representation = region_to_representation
+
+
+def resource_base_to_representation(self, instance):
+    data = super(ResourceBaseSerializer, self).to_representation(instance)
+    try:
+        data['maintenance_frequency_title'] = \
+            instance.maintenance_frequency_title().replace('Data', 'Output')
+    except IndexError:
+        pass
+    data['language_title'] = instance.language_title()
+    return data
+
+
+ResourceBaseSerializer.to_representation = resource_base_to_representation
