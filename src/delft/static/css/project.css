@@ -5,9 +5,9 @@ html {
 :root {
     --black: #151f37;
     --white: #fff;
-    --primary: #00aeef;
-    --primary-opacity: #00aeefC0;
-    --secondary: #0000A0;
+    --primary: #3268A4;
+    --primary-opacity: #3268A4C0;
+    --secondary: #3268A4;
     --primaryBold: #0000A0
 }
 
@@ -731,7 +731,7 @@ form .row {
     margin-top: 1rem !important;
     color: white;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 0.8rem !important;
+    font-size: 1rem !important;
 }
 
 .other-button:hover {
