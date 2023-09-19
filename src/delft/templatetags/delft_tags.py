@@ -1,5 +1,5 @@
 from delft.models import (
-    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension
+    RegionExtension, GroupProfileExtension
 )
 from django import template
 from geonode.base.models import HierarchicalKeyword, GroupProfile, ResourceBase
@@ -35,9 +35,9 @@ def get_keyword_children(context, keyword_slug):
     try:
         keyword = HierarchicalKeyword.objects.get(slug=keyword_slug)
         return keyword.get_children().filter(
-            pk__in=HierarchicalKeywordExtension.objects.filter(
-                featured=True
-            ).values_list('keyword__id', flat=True)
+            hierarchicalkeywordextension__featured=True
+        ).order_by(
+            'hierarchicalkeywordextension__order', 'name'
         )
     except HierarchicalKeyword.DoesNotExist:
         return []
@@ -59,7 +59,9 @@ def get_keyword_children_in_list(context, keyword_slug):
 @register.simple_tag(takes_context=True)
 def get_featured_regions(context):
     """Return featured regions."""
-    regions = RegionExtension.objects.filter(featured=True)
+    regions = RegionExtension.objects.filter(
+        featured=True
+    ).order_by('order', 'region__name')
     return regions
 
 
@@ -68,7 +70,7 @@ def get_featured_output(context):
     """Return featured output."""
     return ResourceBase.objects.filter(
         resourcebaseextension__featured=True
-    ).order_by('title')
+    ).order_by('resourcebaseextension__order', 'title')
 
 
 @register.simple_tag(takes_context=True)

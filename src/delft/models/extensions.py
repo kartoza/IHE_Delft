@@ -12,6 +12,17 @@ class _ResourceExtension(models.Model):
     )
     description = models.TextField(null=True, blank=True)
     icon = models.ImageField(upload_to='delft/icon', null=True, blank=True)
+    order = models.IntegerField(
+        default=0,
+        help_text=(
+            'Order of the output in the landing page. '
+            'The order is based on the order of number. '
+            'On landing page, the order is from left to right '
+            'and top to bottom. '
+            'If there are outputs that are outputs that has order number, '
+            'the order for those outputs are using name.'
+        )
+    )
 
     class Meta:
         abstract = True
@@ -61,6 +72,17 @@ class ResourceBaseExtension(models.Model):
     )
     featured = models.BooleanField(
         default=False, help_text='Show it to homepage.'
+    )
+    order = models.IntegerField(
+        default=0,
+        help_text=(
+            'Order of the output in the landing page. '
+            'The order is based on the order of number. '
+            'On landing page, the order is from left to right '
+            'and top to bottom. '
+            'If there are outputs that are outputs that has order number, '
+            'the order for those outputs are using name.'
+        )
     )
 
     def __str__(self):
