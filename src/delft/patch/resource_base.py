@@ -10,7 +10,7 @@ from geonode.maps.models import Map
 def save_parent(query, region: Region):
     if region.parent:
         query.add(region.parent)
-        save_parent(region.parent)
+        save_parent(query, region.parent)
 
 
 @receiver(post_save, sender=Document)
