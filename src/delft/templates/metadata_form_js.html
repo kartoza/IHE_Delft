@@ -70,6 +70,12 @@
         $('#id_resource-constraints_other').closest('div').find('.mandatory-warning').remove();
         $('#id_resource-data_quality_statement').closest('div').find('.mandatory-warning').remove();
         $('#id_resource-attribution').closest('div').find('.mandatory-warning').remove();
+        $('#id_resource-maintenance_frequency').find('option').each(
+          function () {
+            console.log($(this).html())
+            $(this).html($(this).html().replaceAll('data', 'output'))
+          }
+        );
         {# ------------------- #}
 
       var activeTab = $("#edit-metadata .wizard--progress li.is-active");

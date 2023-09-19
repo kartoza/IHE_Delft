@@ -69,3 +69,20 @@ def get_featured_output(context):
     return ResourceBase.objects.filter(
         resourcebaseextension__featured=True
     ).order_by('title')
+
+
+@register.simple_tag(takes_context=True)
+def metadata_regions(context, resource):
+    """Return metadata regions."""
+
+    parents = []
+    regions = []
+    for region in resource.regions.all():
+        parents += [reg.code for reg in region.get_ancestors()]
+
+    for region in resource.regions.all():
+        if region.code not in parents:
+            regions.append(
+                [reg.name for reg in region.get_ancestors()] + [region.name]
+            )
+    return regions
