@@ -28,7 +28,8 @@
           results: data.results.map(item => {
             item.id = item.text;
             return item
-          })
+          }),
+          pagination: data.pagination
         };
       }
     },
