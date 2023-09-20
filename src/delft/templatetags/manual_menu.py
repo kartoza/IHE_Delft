@@ -79,7 +79,7 @@ def get_project_base_left_topbar_menu(context):
             "items": [
                 {
                     "type": "link",
-                    "href": "/catalogue/#/search/?f=dataset&f=document&f=geostory",
+                    "href": "/catalogue/#/search/",
                     "label": "Search Outputs"
                 },
                 {
