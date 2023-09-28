@@ -686,8 +686,16 @@ form .row {
     font-size: 1.5rem;
 }
 
+.gn-resource-card .card-img-top {
+    height: 224px !important;
+}
+
 .gn-home-section .gn-resource-card .card-img-top {
-    height: 205px;
+    height: 205px !important;
+}
+
+.groups article .img-responsive {
+    width: 100%;
 }
 
 #basicGroupInfo {
@@ -754,11 +762,12 @@ form .row {
     height: 100%;
 }
 
-.msgapi .gn-resource-card .card-text {
+.msgapi .gn-resource-card .gn-card-description {
     white-space: unset;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
+    min-height: 80px;
 }
 
 #basicDescriptiveInfo .col-lg-4 > div,
@@ -769,4 +778,10 @@ form .row {
 #id_resource-attribution.input-empty {
     border-color: #dddddd !important;
     border-color: var(--gn-main-border-color, #dddddd) !important;
+}
+
+.msgapi .gn-resource-card .card-resource-list .card-img-left {
+    height: 171px;
+    object-fit: cover;
+    width: 171px;
 }

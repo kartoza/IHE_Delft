@@ -55,7 +55,7 @@ build:
 	@echo "------------------------------------------------------------------"
 	@echo "Building in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose build
+	@docker-compose build --no-cache
 
 nginx:
 	@echo
