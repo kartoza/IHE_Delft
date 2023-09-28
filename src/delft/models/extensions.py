@@ -34,6 +34,10 @@ class HierarchicalKeywordExtension(_ResourceExtension):
     keyword = models.OneToOneField(
         HierarchicalKeyword, on_delete=models.CASCADE
     )
+    is_initial = models.BooleanField(
+        default=False,
+        help_text='This is the keywords that will be used on metadata form.'
+    )
 
     def __str__(self):
         return self.keyword.slug

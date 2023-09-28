@@ -16,12 +16,11 @@
   ).map(name => {
     $('#{{ keyword.slug }}').append(`<option value="${name}" selected="selected">${name}</option>`)
   })
-
   $('#{{ keyword.slug }}').select2({
     tags: {% if tags %}true{% else %}false{% endif %},
     maximumSelectionLength: 4,
     ajax: {
-      url: '/autocomplete_hierachical_keyword_child/?parent={{ keyword.slug }}',
+      url: '/autocomplete_hierachical_keyword_child/?parent={{ keyword.slug }}{% if not keyword.id %}&is_init=True{% endif %}',
       dataType: 'json',
       processResults: function (data) {
         return {

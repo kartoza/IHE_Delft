@@ -50,6 +50,8 @@ class HierarchicalKeywordAutocompleteByParent(
 
         if self.q:
             qs = qs.filter(**{self.filter_arg: self.q})
+        if self.request.GET.get('is_init', False):
+            qs = qs.filter(hierarchicalkeywordextension__is_initial=True)
         return qs
 
 
@@ -91,9 +93,6 @@ class ByProfileFilter(BaseFilterBackend):
         for key in request.query_params.keys():
             if key == 'by-profile':
                 if not request.user.is_staff:
-                    print(GroupProfile.groups_for_user(
-                            request.user
-                        ))
                     queryset = queryset.filter(
                         group__in=GroupProfile.groups_for_user(
                             request.user
