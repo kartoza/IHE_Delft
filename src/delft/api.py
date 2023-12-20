@@ -71,6 +71,10 @@ class HierarchicalKeywordViewSetByParent(HierarchicalKeywordViewSet):
         except HierarchicalKeyword.DoesNotExist:
             if self.request.GET.get('parent', 'NONE') == '_other':
                 qs = qs.filter(depth=1, numchild=0)
+                if 'filter{slug.icontains}' not in self.request.GET.keys():
+                    qs = qs.filter(
+                        hierarchicalkeywordextension__is_initial=True
+                    )
 
         return qs
 

@@ -442,7 +442,7 @@ form .row {
     -webkit-text-size-adjust: 100% !important;;
 }
 
-.msgapi .gn-menu {
+#gn-brand-navbar {
     padding: 0;
     height: 5rem;
 }
@@ -784,4 +784,8 @@ form .row {
     height: 171px;
     object-fit: cover;
     width: 171px;
+}
+
+.fstGroupTitle {
+    font-weight: 700 !important;
 }

@@ -1,9 +1,8 @@
+from delft.utils import is_user_able_to_add
 from django import template
 from django.utils.safestring import mark_safe
 from geonode.base.models import Configuration
 from geonode_mapstore_client.templatetags.get_menu_json import get_user_menu
-
-from delft.utils import is_user_able_to_add
 
 register = template.Library()
 
@@ -156,8 +155,11 @@ def get_project_base_right_topbar_menu(context):
 @register.simple_tag(takes_context=True)
 def get_project_user_menu(context):
     profile = get_user_menu(context)
-    user = context.get('request').user
-    if user.is_authenticated:
+    try:
+        user = context.get('request').user
+    except AttributeError:
+        user = None
+    if user and user.is_authenticated:
         profile[0]['label'] = user.full_name_or_nick
         profile[0]['variant'] = 'primary'
     return profile
