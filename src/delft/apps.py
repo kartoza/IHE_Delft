@@ -43,4 +43,5 @@ class AppConfig(BaseAppConfig):
         super(AppConfig, self).ready()
         run_setup_hooks()
         import delft.patch.hierachical_keywords
+        import delft.patch.utils
         import delft.signals
