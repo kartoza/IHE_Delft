@@ -11,7 +11,7 @@ def region_to_representation(self, instance):
     data['parents'] = [{
         'code': parent.code,
         'name': parent.name,
-    } for parent in instance.get_ancestors()]
+    } for parent in instance.get_ancestors() if parent.code != 'GLO']
     return data
 
 
@@ -26,6 +26,10 @@ def resource_base_to_representation(self, instance):
     except IndexError:
         pass
     data['language_title'] = instance.language_title()
+    try:
+        data['group']['title'] = instance.group.groupprofile.title
+    except Exception:
+        pass
     return data
 
 

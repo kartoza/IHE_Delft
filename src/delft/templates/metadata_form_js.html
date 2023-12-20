@@ -11,28 +11,6 @@
     $('#id_resource-restriction_code_type').closest('div').hide()
     $('#id_resource-owner').closest('.panel-default').hide()
     $('#id_resource-license').attr('required', 'required');
-    $('#id_resource-regions').find('optgroup[label="Global"]').each(function () {
-      $(this).find('option').each(function (){
-        if ($(this).html().toLowerCase() !== 'global') {
-            $(this).remove()
-        }
-      })
-    })
-    $('#id_resource-regions').find('optgroup').each(function () {
-      let hasChild = false
-      $(this).find('option').each(function (){
-        if($(this).data('section').includes('/')){
-          hasChild = true
-        }
-      })
-      if (hasChild) {
-        $(this).find('option').each(function (){
-          if (!$(this).data('section').includes('/')) {
-            $(this).remove()
-          }
-        })
-      }
-    })
     {# ------------------ #}
 
     var select_button_active = false;
@@ -917,7 +895,7 @@
                         const token_item = token_close_button.parent();
                         token_item.remove();
                         return false;
-                    }); 
+                    });
                 {% else %}
                     $('#id_resource-keywords').tokenfield({
                         createTokensOnBlur: true,
