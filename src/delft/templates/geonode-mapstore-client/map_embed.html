@@ -125,7 +125,6 @@
 
         function openMapViewDrawer() {
             if(window.location.href.includes('/view/')) {
-                console.log('openMapViewDrawer', window.location.href);
                 waitForElm('#drawer-menu-button').then((elm) => {
                     document.getElementById('drawer-menu-button').click();
                 });

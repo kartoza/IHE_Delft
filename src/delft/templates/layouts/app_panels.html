@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load static %}
 {% load floppyforms %}
+{% load client_version %}
 
 <!-- Required to make select2 fields work for autocomplete -->
 <link href="{% static "vendor/select2/dist/css/select2.css" %}" type="text/css" media="screen" rel="stylesheet" />
@@ -14,7 +15,8 @@
 <script type="text/javascript" src="{% static "autocomplete_light/select2.js" %}"></script>
 <script type="text/javascript" src="{% static "autocomplete_light/jquery.post-setup.js" %}"></script>
 
-<script src="{% static "geonode/js/crop_widget/crop_widget_es5.js" %}"></script>
+{# TODO : Delft Specified #}
+<script src="{% static "delft/js/crop_widget/crop_widget_es5.js" %}?{% client_version %}"></script>
 <link rel="stylesheet" href="{% static "geonode/css/crop_widget.css" %}">
 
 <style>
