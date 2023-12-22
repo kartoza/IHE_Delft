@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load client_version %}
 {% load static %}
+{% load delft_tags %}
 
 {% block html_class %}msgapi{% endblock %}
 {% block head %}
@@ -34,8 +35,7 @@
           rel="stylesheet"/>
     <link href="{% static 'lib/css/bootstrap-select.css' %}?{% client_version %}"
           rel="stylesheet"/>
-    <link href="{% static 'css/project.css' %}?{% client_version %}"
-          rel="stylesheet"/>
+    <link href="{% static 'css/project.css' %}?v={% delft_version %}" rel="stylesheet" />
     <link rel="shortcut icon" href="{% static "img/favicon.ico" %}"/>
     {% include './geonode-mapstore-client/snippets/custom_theme.html' %}
     <style type="text/css">[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {

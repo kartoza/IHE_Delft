@@ -686,16 +686,6 @@ form .row {
     font-size: 1.5rem;
 }
 
-.gn-resource-card .card-img-top {
-    aspect-ratio: 7 / 4;
-    height: unset !important;
-}
-
-.gn-home-section .gn-resource-card .card-img-top {
-    aspect-ratio: 7 / 4;
-    height: unset !important;
-}
-
 .groups article .img-responsive {
     width: 100%;
 }
@@ -790,4 +780,15 @@ form .row {
 
 .fstGroupTitle {
     font-weight: 700 !important;
+}
+
+.msgapi .ms-thumbnail,
+.gn-resource-card .card-img-top,
+.gn-home-section .gn-resource-card .card-img-top {
+    aspect-ratio: 7 / 4;
+    height: unset !important;
+}
+
+#id_crop_entry #image {
+    min-height: 109px !important;
 }
