@@ -687,11 +687,13 @@ form .row {
 }
 
 .gn-resource-card .card-img-top {
-    height: 224px !important;
+    aspect-ratio: 7 / 4;
+    height: unset !important;
 }
 
 .gn-home-section .gn-resource-card .card-img-top {
-    height: 205px !important;
+    aspect-ratio: 7 / 4;
+    height: unset !important;
 }
 
 .groups article .img-responsive {

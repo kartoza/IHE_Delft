@@ -61,7 +61,6 @@
 
                     head.appendChild(style);
 
-                    console.log('hide_Banner', head)
                     style.type = 'text/css';
                     if (style.styleSheet) {
                         // This is required for IE8 and below.
@@ -279,8 +278,6 @@
                     });
                     function updateBannerSize() {
                         let height = $('.banner').width() * 2 / 7;
-                        console.log(height)
-                        console.log($('.banner-text').height() + 10)
                         if (height > ($('.banner-text').height() + 10)) {
                             $('.banner').height(height);
                         } else {
@@ -293,7 +290,6 @@
                     updateBannerSize()
                     function openBanner() {
                         delete_cookie('hideBanner');
-                        console.log('banner')
                         $('.banner').slideDown();
                         $('.open-banner').hide();
                     }
