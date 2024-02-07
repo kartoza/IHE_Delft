@@ -17,19 +17,18 @@
 #
 #########################################################################
 
+from delft.models import (
+    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension,
+    ResourceBaseExtension
+)
+from delft.models.preferences import SitePreferences
 from django.contrib import admin
 from geonode.base.admin import RegionAdmin, HierarchicalKeywordAdmin
 from geonode.base.models import HierarchicalKeyword, Region
 from geonode.documents.admin import DocumentAdmin, Document
 from geonode.geoapps.admin import GeoApp
 from geonode.groups.admin import GroupProfileAdmin
-from geonode.groups.models import GroupProfile
-
-from delft.models import (
-    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension,
-    ResourceBaseExtension
-)
-from delft.models.preferences import SitePreferences
+from geonode.groups.models import GroupProfile, GroupMember
 
 admin.site.unregister(HierarchicalKeyword)
 admin.site.unregister(Region)
@@ -64,10 +63,6 @@ class HierarchicalKeywordExtensionAdmin(HierarchicalKeywordAdmin):
     inlines = [HierarchicalKeywordExtensionInline]
 
 
-class GroupProfileExtensionAdmin(GroupProfileAdmin):
-    inlines = [GroupProfileExtensionInline]
-
-
 class DocumentExtensionAdmin(DocumentAdmin):
     inlines = [ResourceBaseExtensionInline]
 
@@ -76,11 +71,19 @@ class GeoAppExtensionAdmin(DocumentAdmin):
     inlines = [ResourceBaseExtensionInline]
 
 
+class GroupMemberInline(admin.TabularInline):
+    model = GroupMember
+
+
+class GroupProfileExtensionAdmin(GroupProfileAdmin):
+    inlines = [GroupProfileExtensionInline, GroupMemberInline]
+
+
 admin.site.register(Region, RegionExtensionAdmin)
 admin.site.register(HierarchicalKeyword, HierarchicalKeywordExtensionAdmin)
-admin.site.register(GroupProfile, GroupProfileExtensionAdmin)
 admin.site.register(Document, DocumentExtensionAdmin)
 admin.site.register(GeoApp, GeoAppExtensionAdmin)
+admin.site.register(GroupProfile, GroupProfileExtensionAdmin)
 
 
 class SitePreferencesAdmin(admin.ModelAdmin):
