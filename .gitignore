@@ -67,4 +67,5 @@ local_settings.py
 .vagrant/
 Vagrantfile
 deployment/.env
+deployment/volumes
 deployment/docker-compose.override.yml

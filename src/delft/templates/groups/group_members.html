@@ -8,7 +8,21 @@
 .select2-container--default .select2-search--inline .select2-search__field {
   width: 300px !important;
 }
+.btn-primary:disabled {
+  opacity: 0.6 !important;
+  cursor: progress !important;
+}
 </style>
+
+{# TODO: Delft specified#}
+{#   Function to make add member disabled #}
+<script>
+function addMemberClicked(el) {
+  $(el).prop('disabled', true);
+  $(el).val('Processing...');
+  $('#add-member-form').submit();
+}
+</script>
 {% endblock head %}
 
 {% block sidebar %}
@@ -133,12 +147,12 @@
     {% if member_form %}
     <div class="row">
         <h3>{% trans "Add new members" %}</h3>
-        <form method="POST" action="{% url "group_members_add" group.slug %}">
+        <form id="add-member-form" method="POST" action="{% url "group_members_add" group.slug %}">
             {% csrf_token %}
             <div id="member_form_container">
-                {{ member_form|as_bootstrap }}<br/><br/>
+                {{ member_form|as_bootstrap }}
             </div>
-            <input type="submit" value="{% trans "Add Project Members" %}" class="btn btn-primary"/>
+            <input type="submit" value="{% trans "Add Project Members" %}" class="btn btn-primary" onclick="addMemberClicked(this)"/>
         </form>
     </div>
     {% endif %}

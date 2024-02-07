@@ -110,6 +110,7 @@ def new_metadata_post_save(instance, *args, **kwargs):
                     if poly2.intersection(poly1):
                         regions_to_add.append(region)
                     # TODO:
+                    #  Delft specified
                     #  We don't need to create global region now
                     # if region.level == 0 and region.parent is None:
                     #     global_regions.append(region)

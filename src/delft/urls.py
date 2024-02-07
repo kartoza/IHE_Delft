@@ -51,6 +51,7 @@ urlpatterns = i18n_patterns(
         name='preferences'
     ),
 ) + [
+                  url('^groups/', include('delft.patch.groups.urls')),
                   url('^api/v2/', include(router.urls)),
                   url(
                       r'^autocomplete_hierachical_keyword_child/$',
