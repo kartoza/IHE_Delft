@@ -33,7 +33,14 @@
       {% endif %}
       </div>
       <div class="col-xs-8 col-md-9 group-details">
-        <p class="group-desc">{{ object.description }}</p>
+        <div class="group-desc">
+            {#  TODO: Delft Specified #}
+            {#  TODO: Newline not showing #}
+            {% autoescape on %}
+                {{ object.description | linebreaksbr }}
+            {% endautoescape %}
+        </div>
+        <br/>
         {% if object.keyword_list %}
         <p>
           {% for keyword in object.keyword_list %}
