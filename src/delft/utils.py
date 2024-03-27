@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.models import Group
+from filer.models.foldermodels import FolderPermission
 
 User = get_user_model()
 
@@ -33,3 +34,18 @@ def is_user_file_manager(user: User) -> bool:
         return True
     except Group.DoesNotExist:
         return False
+
+
+def is_user_filer_url(user: User) -> bool:
+    """Return user filer url."""
+    if is_user_file_manager(user):
+        permission = FolderPermission.objects.filter(
+            user=user,
+            can_edit=FolderPermission.ALLOW
+        ).first()
+        if permission:
+            folder = permission.folder
+            return f'/en-us/admin/filer/folder/{folder.id}/list/'
+        else:
+            return f'/en-us/admin/filer/folder/'
+    return None

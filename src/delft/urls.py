@@ -23,7 +23,8 @@ from delft.api import (
     HierarchicalKeywordAutocompleteByParent,
     HierarchicalKeywordViewSetByParent,
     ResourceBaseViewSetWithKeywords,
-    DocumentViewSetWithProfile
+    DocumentViewSetWithProfile,
+    UserFilerUrlAPI
 )
 from django.conf.urls.i18n import i18n_patterns
 from dynamic_rest import routers
@@ -56,6 +57,11 @@ urlpatterns = i18n_patterns(
                       r'^autocomplete_hierachical_keyword_child/$',
                       HierarchicalKeywordAutocompleteByParent.as_view(),
                       name='autocomplete_hierachical_keyword_child',
+                  ),
+                  url(
+                      r'^user-filer-url/$',
+                      UserFilerUrlAPI.as_view(),
+                      name='user_filer_url',
                   ),
               ] + urlpatterns
 urlpatterns += (
