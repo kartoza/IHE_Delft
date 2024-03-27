@@ -1,0 +1,50 @@
+
+.breadcrumbs {
+  padding: 5px 20px;
+}
+
+.breadcrumbs a {
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.filter-files-container .filter-files-button {
+  padding: 8px 26px 8px 8px !important;
+}
+
+.navigator-tools {
+  margin-bottom: 3px;
+}
+
+.submit-row {
+  margin-top: 10px;
+}
+
+#id_name {
+  margin-left: 1rem;
+}
+
+.unfiled {
+  display: none;
+}
+
+.popup #grp-header {
+  display: none;
+}
+
+.popup #grp-content {
+  padding: 20px 20px 120px;
+}
+
+.select-image {
+  display: none;
+}
+
+.popup .select-image .fa {
+  font-size: 2rem !important;
+}
+
+.popup .select-image {
+  text-align: center !important;
+  display: table-cell;
+}

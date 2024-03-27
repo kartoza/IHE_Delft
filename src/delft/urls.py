@@ -18,10 +18,6 @@
 #
 #########################################################################
 
-from django.conf.urls.i18n import i18n_patterns
-from dynamic_rest import routers
-from geonode.urls import urlpatterns, url, include
-
 from delft.api import (
     GroupViewSetWithCount,
     HierarchicalKeywordAutocompleteByParent,
@@ -29,6 +25,9 @@ from delft.api import (
     ResourceBaseViewSetWithKeywords,
     DocumentViewSetWithProfile
 )
+from django.conf.urls.i18n import i18n_patterns
+from dynamic_rest import routers
+from geonode.urls import urlpatterns, url, include
 
 router = routers.DynamicRouter()
 router.register(r'groups', GroupViewSetWithCount, 'group-profiles')
@@ -59,3 +58,6 @@ urlpatterns = i18n_patterns(
                       name='autocomplete_hierachical_keyword_child',
                   ),
               ] + urlpatterns
+urlpatterns += (
+    url(r'^images/', include('filer.urls')),
+)

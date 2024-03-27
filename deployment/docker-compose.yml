@@ -12,7 +12,7 @@ x-common-django:
     - .env
   volumes:
     - ../src:/usr/src/delft
-    - statics:/mnt/volumes/statics
+    - ./volumes/statics:/mnt/volumes/statics
     - geoserver-data-dir:/geoserver_data/data
     - backup-restore:/backup_restore
     - data:/data
@@ -69,7 +69,7 @@ services:
     volumes:
       - nginx-confd:/etc/nginx
       - nginx-certificates:/geonode-certificates
-      - statics:/mnt/volumes/statics
+      - ./volumes/statics:/mnt/volumes/statics
     restart: on-failure
 
   # Gets and installs letsencrypt certificates
@@ -101,7 +101,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - statics:/mnt/volumes/statics
+      - ./volumes/statics:/mnt/volumes/statics
       - geoserver-data-dir:/geoserver_data/data
       - backup-restore:/backup_restore
       - data:/data

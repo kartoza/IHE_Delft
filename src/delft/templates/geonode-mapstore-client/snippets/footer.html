@@ -1,6 +1,18 @@
 {% load i18n %}
 {% load delft_tags %}
-
+<script>
+  function show() {
+    let identifier = '' + new Date().getTime()
+    window.open('/en-us/admin/filer/folder/3/list/', identifier, "popup=true");
+    window.addEventListener(
+      'message', (event) => {
+        if (event.source?.name === identifier) {
+          console.log(event.data)
+        }
+      }, false
+    );
+  }
+</script>
 <footer class="gn-footer footer-wrapper">
     <div style="display: flex; width: 100%; align-items: center">
         <a class="footer-item" href="https://www.un-ihe.org/" target="_blank"
@@ -14,6 +26,10 @@
            title="Kartoza">
             <img src="/static/img/logo/kartoza-logo-white.svg" height="26"/>
         </a>
-        <div style="text-align: right; flex-grow: 1">Version {% delft_version %}</div>
+        <div style="text-align: right; flex-grow: 1">
+            Version {% delft_version %}</div>
+        <div onclick="show()">
+            SHOW EXPLORER
+        </div>
     </div>
 </footer>
