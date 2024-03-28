@@ -4,6 +4,7 @@ from delft.serializer import (
     GroupProfileSerializerWithCount,
     HierarchicalKeywordSerializerByParent
 )
+from delft.utils import is_user_filer_url
 from dynamic_rest.filters import DynamicFilterBackend, DynamicSortingFilter
 from geonode.base.api.filters import (
     DynamicSearchFilter, ExtentFilter, FavoriteFilter
@@ -19,6 +20,8 @@ from geonode.documents.api.views import (
 )
 from geonode.groups.models import GroupProfile
 from rest_framework.filters import BaseFilterBackend
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 logger = logging.getLogger(__name__)
 
@@ -122,3 +125,11 @@ class DocumentViewSetWithProfile(DocumentViewSet):
         DynamicFilterBackend, DynamicSortingFilter, DynamicSearchFilter,
         ExtentFilter, DocumentPermissionsFilter, ByProfileFilter
     ]
+
+
+class UserFilerUrlAPI(APIView):
+    """Return User Filer URL."""
+
+    def get(self, request):
+        """Return User Filer URL."""
+        return Response(is_user_filer_url(request.user))

@@ -57,7 +57,11 @@ WSGI_APPLICATION = "{}.wsgi.application".format(PROJECT_NAME)
 LANGUAGE_CODE = os.getenv('LANGUAGE_CODE', "en")
 
 if PROJECT_NAME not in INSTALLED_APPS:
-    INSTALLED_APPS += (PROJECT_NAME,)
+    INSTALLED_APPS += (
+        PROJECT_NAME,
+        'easy_thumbnails',
+        'filer',
+    )
 
 # Location of url mappings
 ROOT_URLCONF = os.getenv('ROOT_URLCONF', '{}.urls'.format(PROJECT_NAME))
@@ -190,4 +194,51 @@ MDEDITOR_CONFIGS = {
         'lineNumbers': True,  # lineNumbers
         'language': 'en'  # zh / en / es
     }
+}
+
+# DJANGO FILER
+FILER_CANONICAL_URL = 'sharing/'
+FILER_ENABLE_PERMISSIONS = True
+FILER_LOCATION = os.path.join(MEDIA_ROOT, 'files')
+FILER_BASE_URL = os.path.join(MEDIA_URL, 'files')
+FILER_MIME_TYPE_WHITELIST = [
+    "image/*"
+]
+FILER_STORAGES = {
+    'public': {
+        'main': {
+            'ENGINE': 'filer.storage.PublicFileSystemStorage',
+            'OPTIONS': {
+                'location': FILER_LOCATION,
+                'base_url': FILER_BASE_URL,
+            },
+            'UPLOAD_TO': 'filer.utils.generate_filename.randomized',
+            'UPLOAD_TO_PREFIX': 'filer_public',
+        },
+        'thumbnails': {
+            'ENGINE': 'filer.storage.PublicFileSystemStorage',
+            'OPTIONS': {
+                'location': FILER_LOCATION,
+                'base_url': FILER_BASE_URL,
+            },
+        },
+    },
+    'private': {
+        'main': {
+            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
+            'OPTIONS': {
+                'location': FILER_LOCATION,
+                'base_url': FILER_BASE_URL,
+            },
+            'UPLOAD_TO': 'filer.utils.generate_filename.randomized',
+            'UPLOAD_TO_PREFIX': 'filer_public',
+        },
+        'thumbnails': {
+            'ENGINE': 'filer.storage.PrivateFileSystemStorage',
+            'OPTIONS': {
+                'location': FILER_LOCATION,
+                'base_url': FILER_BASE_URL,
+            },
+        },
+    },
 }
