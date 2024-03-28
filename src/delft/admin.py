@@ -25,7 +25,7 @@ from delft.models.preferences import SitePreferences
 from delft.utils import is_user_file_manager
 from django import forms
 from django.contrib import admin
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, Permission
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from filer.models.foldermodels import Folder, FolderPermission
@@ -148,7 +148,22 @@ class CustomProfileChangeForm(ProfileChangeForm):
         is_file_manager = self.cleaned_data['is_file_manager']
         ids = list(self.cleaned_data['groups'].values_list('id', flat=True))
         if self.is_user_file_manager != is_file_manager:
-            group, _ = Group.objects.get_or_create(name='file-manager')
+            group, created = Group.objects.get_or_create(name='file-manager')
+
+            if created:
+                codenames = [
+                    'add_file', 'change_file', 'delete_file', 'view_file',
+                    'add_folder', 'change_folder', 'delete_folder',
+                    'view_folder', 'can_use_directory_listing'
+                ]
+                for codename in codenames:
+                    try:
+                        group.permissions.add(
+                            Permission.objects.get(codename=codename)
+                        )
+                    except Permission.DoesNotExist:
+                        pass
+
             if is_file_manager:
                 self.cleaned_data['is_staff'] = True
                 ids.append(group.id)

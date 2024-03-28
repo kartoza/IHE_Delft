@@ -36,9 +36,11 @@ def is_user_file_manager(user: User) -> bool:
         return False
 
 
-def is_user_filer_url(user: User) -> bool:
+def is_user_filer_url(user: User) -> str:
     """Return user filer url."""
     if is_user_file_manager(user):
+        if user.is_superuser:
+            return f'/en-us/admin/filer/folder/'
         permission = FolderPermission.objects.filter(
             user=user,
             can_edit=FolderPermission.ALLOW
