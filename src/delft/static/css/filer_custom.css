@@ -48,3 +48,11 @@
   text-align: center !important;
   display: table-cell;
 }
+
+.navigator-tools {
+  display: none;
+}
+
+.paginator .actions {
+  display: none;
+}
