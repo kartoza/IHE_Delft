@@ -12,20 +12,12 @@
   padding: 8px 26px 8px 8px !important;
 }
 
-.navigator-tools {
-  margin-bottom: 3px;
-}
-
 .submit-row {
   margin-top: 10px;
 }
 
 #id_name {
   margin-left: 1rem;
-}
-
-.unfiled {
-  display: none;
 }
 
 .popup #grp-header {
@@ -38,6 +30,7 @@
 
 .select-image {
   display: none;
+  width: 30px;
 }
 
 .popup .select-image .fa {
@@ -49,10 +42,19 @@
   display: table-cell;
 }
 
-.navigator-tools {
+.actions-separated-list li:nth-child(2),
+.actions-separated-list li:nth-child(3),
+.filer-dropdown-container,
+#grp-content-title .navigator-tools,
+.navigator-tools .filer-list-type-switcher-wrapper {
   display: none;
 }
 
-.paginator .actions {
-  display: none;
+.grp-changelist-actions {
+  list-style-type: none;
+}
+
+.navigator-tools .actions-wrapper a,
+.navigator-tools .actions-wrapper a .fa {
+  cursor: pointer;
 }

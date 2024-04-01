@@ -13,11 +13,11 @@
            {% if max_filesize %}}data-max-filesize="{{ max_filesize|safe }}"{% endif %}>
         <thead>
             <tr>
-{#                <th class="column-checkbox">#}
-{#                    {% if paginator.count and not is_popup %}#}
-{#                        <input type="checkbox" id="action-toggle">#}
-{#                    {% endif %}#}
-{#                </th>#}
+                <th class="column-checkbox">
+                    {% if paginator.count and not is_popup %}
+                        <input type="checkbox" id="action-toggle">
+                    {% endif %}
+                </th>
                 <th class="select-image"></th>
                 <th class="column-icon">&nbsp;</th>
                 <th class="column-name">{% translate "Name" %}</th>
@@ -29,7 +29,7 @@
         <tbody>
             {% for item in virtual_items %}
                 <tr class="unfiled">
-{#                    <td class="column-checkbox">&nbsp;</td>#}
+                    <td class="column-checkbox">&nbsp;</td>
                     <td class="column-icon">
                         <a href="{{ item.get_admin_directory_listing_url_path }}{% filer_admin_context_url_params %}"
                             title="{% blocktrans with item.name as item_label %}Change '{{ item_label }}' folder details{% endblocktrans %}">
@@ -50,16 +50,16 @@
                 {% if item.file_type == "Folder" %}
                     {% with item as subfolder %}
                         <tr class="js-filer-dropzone js-filer-dropzone-folder" data-url="{% url 'admin:filer-ajax_upload' folder_id=subfolder.id %}" data-folder-name="{{ subfolder.name }}" data-max-uploader-connections="{{ uploader_connections }}" data-max-files="{{ max_files|safe }}" data-max-filesize="{{ max_filesize|safe }}">
-{#                            <td class="column-checkbox">#}
-{#                                {% if filer_admin_context.pick_folder and item.file_type == 'Folder' %}#}
-{#                                    <a class="insertlink insertlinkButton"#}
-{#                                        href="#" onclick="opener.dismissRelatedFolderLookupPopup(window, '{{ subfolder.pk|safe }}', '{{ subfolder.pretty_logical_path }}'); return false;" >#}
-{#                                        <span class="fa fa-arrow-left filer-icon cms-icon-select"></span>#}
-{#                                    </a>#}
-{#                                {% elif action_form and item.pk and not is_popup %}#}
-{#                                    <input type="checkbox" class="action-select" value="folder-{{ item.pk|safe }}" name="_selected_action">#}
-{#                                {% endif %}#}
-{#                            </td>#}
+                            <td class="column-checkbox">
+                                {% if filer_admin_context.pick_folder and item.file_type == 'Folder' %}
+                                    <a class="insertlink insertlinkButton"
+                                        href="#" onclick="opener.dismissRelatedFolderLookupPopup(window, '{{ subfolder.pk|safe }}', '{{ subfolder.pretty_logical_path }}'); return false;" >
+                                        <span class="fa fa-arrow-left filer-icon cms-icon-select"></span>
+                                    </a>
+                                {% elif action_form and item.pk and not is_popup %}
+                                    <input type="checkbox" class="action-select" value="folder-{{ item.pk|safe }}" name="_selected_action">
+                                {% endif %}
+                            </td>
                             <td class="column-icon">
                                 <a href="{{ subfolder.get_admin_directory_listing_url_path }}{% filer_admin_context_url_params %}"
                                     title="{% blocktrans with subfolder.name as item_label %}Change '{{ item_label }}' folder details{% endblocktrans %}">
@@ -97,14 +97,14 @@
                     {% with item as file %}
                         {% filer_has_permission item 'edit' as has_change_permission %}
                         <tr>
-{#                            <td class="column-checkbox">#}
-{#                                {% if is_popup and filer_admin_context.pick_file %}#}
-{#                                    <a class="insertlink insertlinkButton" href="#" onclick="opener.dismissRelatedImageLookupPopup(window, '{{ file.id|unlocalize }}', '{% file_icon_url file %}', '{{ file.label|escapejs }}', '{{ file.get_admin_change_url }}'); return false;"#}
-{#                                        title="{% translate 'Select this file' %}"><span class="fa fa-arrow-left filer-icon filer-icon-select"></span></a>#}
-{#                                {% elif action_form and not is_popup %}#}
-{#                                    <input type="checkbox" class="action-select" value="file-{{ item.pk|safe }}" name="_selected_action">#}
-{#                                {% endif %}#}
-{#                            </td>#}
+                            <td class="column-checkbox">
+                                {% if is_popup and filer_admin_context.pick_file %}
+                                    <a class="insertlink insertlinkButton" href="#" onclick="opener.dismissRelatedImageLookupPopup(window, '{{ file.id|unlocalize }}', '{% file_icon_url file %}', '{{ file.label|escapejs }}', '{{ file.get_admin_change_url }}'); return false;"
+                                        title="{% translate 'Select this file' %}"><span class="fa fa-arrow-left filer-icon filer-icon-select"></span></a>
+                                {% elif action_form and not is_popup %}
+                                    <input type="checkbox" class="action-select" value="file-{{ item.pk|safe }}" name="_selected_action">
+                                {% endif %}
+                            </td>
                             <td class="select-image">
                                 <a title="Select file"
                                    onclick="onSelected({
@@ -239,18 +239,13 @@
                 {% trans "next" %}
             </a>
         {% endif %}
-        <div class="actions">
+        <ul class="actions grp-changelist-actions">
             {% if actions_selection_counter %}
                 <script>var _actions_icnt="{{ paginated_items.object_list|length|default:"0" }}";</script>
-                <span class="action-counter" data-actions-icnt="{{ paginated_items.object_list|length|default:'0' }}">{{ selection_note }}</span>
-                {% if paginator.count != paginated_items.object_list|length %}
-                    <span class="all">{{ selection_note_all }}</span>
-                    <span class="question">
-                        <a href="javascript:void(0);" title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with paginator.count as total_count %}Select all {{ total_count }}{% endblocktrans %}</a>
-                    </span>
-                    <span class="clear"><a href="javascript:void(0);">{% trans "Clear selection" %}</a></span>
-                {% endif %}
+                <li class="grp-action-counter">
+                    <span class="action-counter grp-action-counter" data-actions-icnt="{{ paginated_items.object_list|length|default:'0' }}">{{ selection_note }}</span>
+                </li>
             {% endif %}
-        </div>
+        </ul>
     </div>
 </section>
