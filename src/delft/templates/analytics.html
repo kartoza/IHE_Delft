@@ -1,0 +1,139 @@
+<!-- Google tag (gtag.js) -->
+<script async
+        src="https://www.googletagmanager.com/gtag/js?id={{ preferences.google_analytics_measurement_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+  gtag('config', '{{ preferences.google_analytics_measurement_id }}');
+</script>
+<script>
+  function getResourceType() {
+    const url = window.location.href
+    if (url.includes('/dataset')) {
+      return 'datasets'
+    } else if (url.includes('/document')) {
+      return 'document'
+    } else if (url.includes('/geostory')) {
+      return 'story'
+    }
+    return 'unknown'
+  }
+
+  {# when navigate #}
+  window.navigation.addEventListener("navigate", (event) => {
+    gtag('send', 'pageview', { 'page': event.destination.url });
+  });
+
+  (function (open) {
+    XMLHttpRequest.prototype.open = function (m, u, a, us, p) {
+      this.addEventListener('readystatechange', function () {
+        try {
+          let url = this.responseURL
+          if (!url.includes(window.location.origin)) {
+            url = window.location.origin + url
+          }
+
+          {# This is search #}
+          if (m === 'GET') {
+            {# This is for search #}
+            if (url.includes('api/v2/resources') && url.includes('search=')) {
+              const search = new URL(url).searchParams.get('search')
+              if (search) {
+                gtag(
+                  "event", "search", {
+                    search_term: search
+                  }
+                );
+              }
+            } else if (url.includes('api/v2')) {
+              try {
+                const response = JSON.parse(this.response)
+                let resource = null;
+                ['resource', 'document', 'geoapp', 'map', 'dataset'].forEach(type => {
+                  if (response[type]) {
+                    resource = response[type]
+                  }
+                })
+                if (resource?.pk) {
+                  let resource_type = resource?.resource_type
+                  if (resource_type) {
+                    resource_type = resource_type === 'geostory' ? 'story' : resource_type
+                    if (resource?.title) {
+                      gtag("event", "select_content", {
+                        content_type: resource_type,
+                        content_id: resource?.title
+                      });
+                    }
+                  }
+                }
+              } catch (e) {
+
+              }
+            } else if (url.includes('/download')) {
+              {# if download a file #}
+              let resource_type = url.split('/')[3]
+              if (resource_type === 'download') {
+                resource_type = 'datasets'
+              }
+              if (resource_type) {
+                gtag("event", "download_content", {
+                  content_type: resource_type,
+                  content_id: document.title
+                });
+              }
+            }
+          }
+        } catch (err) {
+
+        }
+      }, false);
+      open.call(this, m, u, a, us, p);
+    };
+  })(XMLHttpRequest.prototype.open);
+
+  {# Check when download button clicked #}
+  window.onload = function (evt) {
+    $(document).on('DOMNodeInserted', function (e) {
+      try {
+        if ($(e.target).hasClass('gn-menu-list')) {
+          const $download = $('#ms-app .gn-menu-list a.btn-primary[download]')
+          if ($download.length) {
+            $download.click(evt => {
+              const href = $download.attr('href')
+              if (href) {
+                let resource_type = $download.attr('href').split('/')[3]
+                if (resource_type === 'download') {
+                  resource_type = 'datasets'
+                }
+                gtag("event", "download_content", {
+                  content_type: resource_type,
+                  content_id: document.title
+                });
+              }
+            })
+          }
+        } else if ($(e.target).hasClass('modal-footer')) {
+          const $export = $('#mapstore-export .download-button')
+          if ($export.length) {
+            $export.click(evt => {
+              gtag("event", "download_content", {
+                content_type: getResourceType(),
+                content_id: document.title
+              });
+            })
+          }
+
+        }
+      } catch (err) {
+
+      }
+    });
+  }
+
+  gtag('send', 'pageview', { 'page': location.pathname + location.search + location.hash });
+</script>

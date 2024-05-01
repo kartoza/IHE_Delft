@@ -1,12 +1,15 @@
+from delft.models.singleton import SingletonModel
 from django.db import models
 from mdeditor.fields import MDTextField
-
-from delft.models.singleton import SingletonModel
 
 
 class SitePreferences(SingletonModel):
     """Preference settings specifically for website."""
 
+    google_analytics_measurement_id = models.CharField(
+        default='', max_length=256,
+        help_text='Google analytics measurement id'
+    )
     # -----------------------------------------------
     # LANDING PAGE
     # -----------------------------------------------

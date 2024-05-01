@@ -90,6 +90,11 @@ class SitePreferencesAdmin(admin.ModelAdmin):
     """Site Preferences admin."""
 
     fieldsets = (
+        ('', {
+            'fields': (
+                'google_analytics_measurement_id',
+            ),
+        }),
         ('Landing Page', {
             'fields': (
                 'landing_page_banner',
