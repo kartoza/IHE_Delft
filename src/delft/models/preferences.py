@@ -7,7 +7,7 @@ class SitePreferences(SingletonModel):
     """Preference settings specifically for website."""
 
     google_analytics_measurement_id = models.CharField(
-        default='', max_length=256,
+        default='', max_length=256, null=True, blank=True,
         help_text='Google analytics measurement id'
     )
     # -----------------------------------------------

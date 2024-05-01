@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sitepreferences',
             name='google_analytics_measurement_id',
-            field=models.CharField(default='', help_text='Google analytics measurement id', max_length=256),
+            field=models.CharField(default='', help_text='Google analytics measurement id', max_length=256, null=True, blank=True),
         ),
     ]
