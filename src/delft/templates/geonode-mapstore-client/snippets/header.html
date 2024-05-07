@@ -26,3 +26,7 @@
         resize();
     })();
 </script>
+
+{% if preferences.google_analytics_measurement_id %}
+    {% include 'analytics.html' %}
+{% endif %}
