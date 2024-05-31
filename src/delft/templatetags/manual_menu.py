@@ -69,8 +69,12 @@ def get_project_base_left_topbar_menu(context):
     is_mobile = _is_mobile_device(context)
     is_logged_in = _is_logged_in(context)
 
-    user = context.get('request').user
-    is_able_to_add = is_user_able_to_add(user)
+    is_able_to_add = False
+    try:
+        user = context.get('request').user
+        is_able_to_add = is_user_able_to_add(user)
+    except AttributeError:
+        pass
     return [
         {
             "label": 'Outputs',
@@ -109,7 +113,10 @@ def get_project_base_left_topbar_menu(context):
 @register.simple_tag(
     takes_context=True, name='get_project_base_right_topbar_menu')
 def get_project_base_right_topbar_menu(context):
-    user = context.get('request').user
+    try:
+        user = context.get('request').user
+    except AttributeError:
+        user = None
     users = {
         "label": "Users",
         "type": "dropdown",
@@ -126,7 +133,7 @@ def get_project_base_right_topbar_menu(context):
             }
         ]
     }
-    if user.is_authenticated and not Configuration.load().read_only:
+    if user and user.is_authenticated and not Configuration.load().read_only:
         users['items'].extend([
             {
                 "type": "divider"
