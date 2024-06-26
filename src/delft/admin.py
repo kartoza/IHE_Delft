@@ -17,15 +17,9 @@
 #
 #########################################################################
 
-from delft.models import (
-    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension,
-    ResourceBaseExtension
-)
-from delft.models.preferences import SitePreferences
-from delft.utils import is_user_file_manager
 from django import forms
 from django.contrib import admin
-from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.models import Group
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from filer.models.foldermodels import Folder, FolderPermission
@@ -40,6 +34,13 @@ from geonode.groups.admin import GroupProfileAdmin
 from geonode.groups.models import GroupProfile, GroupMember
 from geonode.people.admin import ProfileAdmin, Profile
 from geonode.people.forms import ProfileChangeForm
+
+from delft.models import (
+    HierarchicalKeywordExtension, RegionExtension, GroupProfileExtension,
+    ResourceBaseExtension
+)
+from delft.models.preferences import SitePreferences
+from delft.utils import is_user_file_manager, file_manager_group
 
 admin.site.unregister(HierarchicalKeyword)
 admin.site.unregister(Region)
@@ -153,22 +154,7 @@ class CustomProfileChangeForm(ProfileChangeForm):
         is_file_manager = self.cleaned_data['is_file_manager']
         ids = list(self.cleaned_data['groups'].values_list('id', flat=True))
         if self.is_user_file_manager != is_file_manager:
-            group, created = Group.objects.get_or_create(name='file-manager')
-
-            if created:
-                codenames = [
-                    'add_file', 'change_file', 'delete_file', 'view_file',
-                    'add_folder', 'change_folder', 'delete_folder',
-                    'view_folder', 'can_use_directory_listing'
-                ]
-                for codename in codenames:
-                    try:
-                        group.permissions.add(
-                            Permission.objects.get(codename=codename)
-                        )
-                    except Permission.DoesNotExist:
-                        pass
-
+            group = file_manager_group()
             if is_file_manager:
                 self.cleaned_data['is_staff'] = True
                 ids.append(group.id)
@@ -196,6 +182,21 @@ class CustomProfileChangeForm(ProfileChangeForm):
         return instance
 
 
+def assign_as_file_manager(modeladmin, request, users):
+    """Assign user to file manager."""
+    group = file_manager_group()
+    if group:
+        group.user_set.add(*users)
+
+
+def unassign_as_file_manager(modeladmin, request, users):
+    """Unassign user to file manager."""
+    group = file_manager_group()
+    if group:
+        for user in users:
+            user.groups.remove(group)
+
+
 class CustomProfileAdmin(ProfileAdmin):
     """Custom profile with checking file manager."""
     list_display = (
@@ -204,7 +205,11 @@ class CustomProfileAdmin(ProfileAdmin):
         'is_staff', 'is_active', 'is_file_manager'
     )
     form = CustomProfileChangeForm
-    actions = [set_user_and_group_dataset_permission]
+    actions = [
+        set_user_and_group_dataset_permission,
+        assign_as_file_manager,
+        unassign_as_file_manager
+    ]
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
