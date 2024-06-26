@@ -1,5 +1,5 @@
 -e git+https://github.com/Kartoza/geonode-mapstore-client.git@4.0.2-delft#egg=django_geonode_mapstore_client
--e git+https://github.com/GeoNode/geonode.git@4.0.x#egg=GeoNode
+-e git+https://github.com/Kartoza/geonode.git@4.0.x-fix#egg=GeoNode
 # GeoNode==4.0.3
 django-mdeditor==0.1.20
 django-filer==3.1.1
