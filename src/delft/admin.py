@@ -29,7 +29,7 @@ from geonode.base.admin import (
 )
 from geonode.base.models import HierarchicalKeyword, Region
 from geonode.documents.admin import DocumentAdmin, Document
-from geonode.geoapps.admin import GeoApp
+from geonode.geoapps.admin import GeoAppAdmin, GeoApp
 from geonode.groups.admin import GroupProfileAdmin
 from geonode.groups.models import GroupProfile, GroupMember
 from geonode.people.admin import ProfileAdmin, Profile
@@ -50,6 +50,42 @@ admin.site.unregister(GeoApp)
 admin.site.unregister(Profile)
 
 
+def get_extension(resource):
+    """Get extension."""
+    try:
+        try:
+            resource.resourcebaseextension  # noqa
+        except ResourceBaseExtension.DoesNotExist:
+            pass
+        extension, _ = ResourceBaseExtension.objects.get_or_create(
+            resource=resource
+        )
+        return extension
+    except AttributeError:
+        pass
+    return None
+
+
+def toggle_feature(resource, is_featured):
+    """Toggle the featured or not."""
+    extension = get_extension(resource)
+    if extension:
+        extension.featured = is_featured
+        extension.save()
+
+
+def feature_to_home(modeladmin, request, resources):
+    """Feature the resource to home."""
+    for resource in resources:
+        toggle_feature(resource, True)
+
+
+def unfeature_to_home(modeladmin, request, resources):
+    """Unfeature it to home."""
+    for resource in resources:
+        toggle_feature(resource, False)
+
+
 # INLINES
 class RegionExtensionInline(admin.StackedInline):
     model = RegionExtension
@@ -68,6 +104,22 @@ class ResourceBaseExtensionInline(admin.StackedInline):
 
 
 # ADMINS
+class AdminWithFeatured:
+    def is_featured_at_home(self, resource):
+        """Return colors that palette has."""
+        extension = get_extension(resource)
+        if extension:
+            if extension.featured:
+                return mark_safe(
+                    '<img src="/static/admin/img/icon-yes.svg" alt="True">'
+                )
+        return mark_safe(
+            '<img src="/static/admin/img/icon-no.svg" alt="False">'
+        )
+
+    is_featured_at_home.allow_tags = True
+
+
 class RegionExtensionAdmin(RegionAdmin):
     inlines = [RegionExtensionInline]
 
@@ -80,8 +132,10 @@ class DocumentExtensionAdmin(DocumentAdmin):
     inlines = [ResourceBaseExtensionInline]
 
 
-class GeoAppExtensionAdmin(DocumentAdmin):
+class GeoAppExtensionAdmin(AdminWithFeatured, GeoAppAdmin):
+    list_display = GeoAppAdmin.list_display + ('is_featured_at_home',)
     inlines = [ResourceBaseExtensionInline]
+    actions = GeoAppAdmin.actions + [feature_to_home, unfeature_to_home]
 
 
 class GroupMemberInline(admin.TabularInline):
@@ -89,7 +143,7 @@ class GroupMemberInline(admin.TabularInline):
 
 
 class GroupProfileExtensionAdmin(GroupProfileAdmin):
-    inlines = [GroupProfileExtensionInline, GroupMemberInline]
+    inlines = GroupProfileAdmin.inlines + [GroupProfileExtensionInline]
 
 
 admin.site.register(Region, RegionExtensionAdmin)
