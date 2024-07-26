@@ -18,6 +18,10 @@
 #
 #########################################################################
 
+from django.conf.urls.i18n import i18n_patterns
+from dynamic_rest import routers
+from geonode.urls import urlpatterns, url, include
+
 from delft.api import (
     GroupViewSetWithCount,
     HierarchicalKeywordAutocompleteByParent,
@@ -26,9 +30,12 @@ from delft.api import (
     DocumentViewSetWithProfile,
     UserFilerUrlAPI
 )
-from django.conf.urls.i18n import i18n_patterns
-from dynamic_rest import routers
-from geonode.urls import urlpatterns, url, include
+
+
+def trigger_error(request):
+    """View for sentry debug."""
+    division_by_zero = 1 / 0
+
 
 router = routers.DynamicRouter()
 router.register(r'groups', GroupViewSetWithCount, 'group-profiles')
@@ -43,6 +50,7 @@ from django.views.generic.base import RedirectView
 
 # You can register your own urlpatterns here
 urlpatterns = i18n_patterns(
+    url(r'sentry-debug/$', trigger_error),
     url(
         r'^admin/delft/sitepreferences/$',
         RedirectView.as_view(
