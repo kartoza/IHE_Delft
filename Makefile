@@ -21,7 +21,7 @@ web:
 	@echo "------------------------------------------------------------------"
 	@echo "Running in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose up -d
+	@docker compose up -d
 
 frontend-dev:
 	@echo
@@ -35,7 +35,7 @@ dev:
 	@echo "------------------------------------------------------------------"
 	@echo "Running in dev mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose ${ARGS} up -d dev
+	@docker compose ${ARGS} up -d dev
 
 dev-kill:
 	@echo
@@ -55,7 +55,7 @@ build:
 	@echo "------------------------------------------------------------------"
 	@echo "Building in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose build --no-cache
+	@docker compose build --no-cache
 
 nginx:
 	@echo
@@ -65,7 +65,7 @@ nginx:
 	@echo "In a production environment you will typically use nginx running"
 	@echo "on the host rather if you have a multi-site host."
 	@echo "------------------------------------------------------------------"
-	@docker-compose up -d nginx
+	@docker compose up -d nginx
 	@echo "Site should now be available at http://localhost"
 
 up: web
@@ -75,56 +75,56 @@ status:
 	@echo "------------------------------------------------------------------"
 	@echo "Show status for all containers"
 	@echo "------------------------------------------------------------------"
-	@docker-compose ps
+	@docker compose ps
 
 kill:
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Killing in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose stop
+	@docker compose stop
 
 down: kill
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Removing production instance!!! "
 	@echo "------------------------------------------------------------------"
-	@docker-compose down
+	@docker compose down
 
 update: up
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Update production instance"
 	@echo "------------------------------------------------------------------"
-	@docker-compose ${ARGS} restart django worker nginx
+	@docker compose ${ARGS} restart django worker nginx
 
 shell:
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Shelling in in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose exec django /bin/bash
+	@docker compose exec django /bin/bash
 
 db-bash:
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Entering DB Bash in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose exec db sh
+	@docker compose exec db sh
 
 db-shell:
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Entering PostgreSQL Shell in production mode"
 	@echo "------------------------------------------------------------------"
-	docker-compose exec db su - db -c "psql"
+	docker compose exec db su - db -c "psql"
 
 collectstatic:
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Collecting static in production mode"
 	@echo "------------------------------------------------------------------"
-	#@docker-compose run django python manage.py collectstatic --noinput
+	#@docker compose run django python manage.py collectstatic --noinput
 	#We need to run collect static in the same context as the running
 	# django container it seems so I use docker exec here
 	# no -it flag so we can run over remote shell
@@ -143,7 +143,7 @@ migrate:
 	@echo "------------------------------------------------------------------"
 	@echo "Running migrate static in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose exec django python manage.py migrate
+	@docker compose exec django python manage.py migrate
 
 # --------------- help --------------------------------
 
@@ -170,20 +170,20 @@ db:
 	@echo "------------------------------------------------------------------"
 	@echo "Running db in production mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose ${ARGS} up -d db
+	@docker compose ${ARGS} up -d db
 
 wait-db:
-	@docker-compose ${ARGS} exec -T db su - db -c "until pg_isready; do sleep 5; done"
+	@docker compose ${ARGS} exec -T db su - db -c "until pg_isready; do sleep 5; done"
 
 create-test-db:
-	@docker-compose ${ARGS} exec -T db su - db -c "psql -c 'create database test_db;'"
+	@docker compose ${ARGS} exec -T db su - db -c "psql -c 'create database test_db;'"
 
 devweb: db
 	@echo
 	@echo "------------------------------------------------------------------"
 	@echo "Running in DEVELOPMENT mode"
 	@echo "------------------------------------------------------------------"
-	@docker-compose ${ARGS} up --no-recreate --no-deps -d dev
+	@docker compose ${ARGS} up --no-recreate --no-deps -d dev
 
 sleep:
 	@echo
@@ -198,8 +198,8 @@ devweb-test:
 	@echo "------------------------------------------------------------------"
 	@echo "Run tests"
 	@echo "------------------------------------------------------------------"
-	@docker-compose exec -T dev python manage.py collectstatic
-	@docker-compose exec -T dev python manage.py test --keepdb --noinput
+	@docker compose exec -T dev python manage.py collectstatic
+	@docker compose exec -T dev python manage.py test --keepdb --noinput
 
 # --------------- TESTS ---------------
 run-flake8:
