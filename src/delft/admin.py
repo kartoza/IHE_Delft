@@ -236,10 +236,24 @@ class CustomProfileChangeForm(ProfileChangeForm):
         return instance
 
 
+def assign_as_staff(modeladmin, request, users):
+    """Assign user as staff."""
+    users.update(is_staff=True)
+
+
+def unassign_as_staff(modeladmin, request, users):
+    """Unassign user as staff."""
+    group = file_manager_group()
+    users.exclude(
+        groups__in=[group.id]
+    ).filter(is_superuser=False).update(is_staff=False)
+
+
 def assign_as_file_manager(modeladmin, request, users):
     """Assign user to file manager."""
     group = file_manager_group()
     if group:
+        users.update(is_staff=True)
         group.user_set.add(*users)
 
 
@@ -261,6 +275,8 @@ class CustomProfileAdmin(ProfileAdmin):
     form = CustomProfileChangeForm
     actions = [
         set_user_and_group_dataset_permission,
+        assign_as_staff,
+        unassign_as_staff,
         assign_as_file_manager,
         unassign_as_file_manager
     ]
