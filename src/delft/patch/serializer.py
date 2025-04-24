@@ -1,9 +1,11 @@
 from django.conf import settings
 from django.forms.models import model_to_dict
+
 from geonode.api.resourcebase_api import CommonModelApi
 from geonode.base.api.serializers import (
     SimpleRegionSerializer, ResourceBaseSerializer
 )
+from geonode.geoapps.api.serializers import GeoAppSerializer
 
 
 def region_to_representation(self, instance):
@@ -68,3 +70,17 @@ def new_format_objects(self, objects):
 
 
 CommonModelApi.format_objects = new_format_objects
+
+
+def new_geoapp_validate(self, data):
+    """ Fix validate of geoapps.
+    The current version will always put request.user to owner
+    """
+    request = self.context.get('request')
+    if request:
+        if not self.instance or not self.instance.owner:
+            data['owner'] = request.user
+    return data
+
+
+GeoAppSerializer.validate = new_geoapp_validate

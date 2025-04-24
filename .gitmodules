@@ -1,0 +1,3 @@
+[submodule "geonode"]
+	path = geonode
+	url = https://github.com/Kartoza/geonode.git
