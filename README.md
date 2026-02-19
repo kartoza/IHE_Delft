@@ -1,5 +1,5 @@
-![Staging Tag](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/lgkgh/889dd6c34a68d9461b1fd8cdb56b8a21/raw/wadp-geonode_build-tag.json)
-![Staging Status](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/lgkgh/889dd6c34a68d9461b1fd8cdb56b8a21/raw/wadp-geonode_build-status.json)
+![Staging Tag](https://img.shields.io/endpoint?url=https://kartoza.github.io/kartoza-badges/data/wadp_build_sta/tag.json)
+![Staging Status](https://img.shields.io/endpoint?url=https://kartoza.github.io/kartoza-badges/data/wadp_build_sta/status.json)
 
 # IHE_Delft
 
