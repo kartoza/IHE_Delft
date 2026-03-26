@@ -7,6 +7,7 @@ x-common-django:
   build:
     context: ../
     dockerfile: deployment/docker/Dockerfile
+    target: prod
   restart: on-failure
   env_file:
     - .env
@@ -88,7 +89,7 @@ services:
 
   # Geoserver backend
   geoserver:
-    image: geonode/geoserver:2.20.7
+    image: geonode/geoserver:2.24.4-latest
     container_name: ${COMPOSE_PROJECT_NAME}_geoserver
     healthcheck:
       test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8080/geoserver/ows"
@@ -157,7 +158,8 @@ services:
     entrypoint: [ ]
     build:
       context: ../
-      dockerfile: deployment/docker/Dockerfile-Dev
+      dockerfile: deployment/docker/Dockerfile
+      target: dev
     depends_on:
       - django
       - geoserver
