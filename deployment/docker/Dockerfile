@@ -1,17 +1,11 @@
-FROM python:3.10.2-buster
+FROM python:3.10-bullseye as prod
 LABEL GeoNode development team
 
 RUN mkdir -p /usr/src/delft
 
 # Enable postgresql-client-13
-# TODO: This is error
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
-RUN echo "deb http://deb.debian.org/debian/ stable main contrib non-free" | tee /etc/apt/sources.list.d/debian.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-
-# To get GDAL 3.2.1 to fix this issue https://github.com/OSGeo/gdal/issues/1692
-# TODO: The following line should be removed if base image upgraded to Bullseye
-RUN echo "deb http://deb.debian.org/debian/ bullseye main contrib non-free" | tee /etc/apt/sources.list.d/debian.list
 
 # This section is borrowed from the official Django image but adds GDAL and others
 RUN apt-get update -y && apt-get upgrade -y
@@ -26,7 +20,7 @@ RUN apt-get install -y --no-install-recommends \
     gcc zip gettext geoip-bin cron \
     postgresql-client-13 \
     sqlite3 spatialite-bin libsqlite3-mod-spatialite \
-    python3-dev python3-gdal python3-psycopg2 python3-ldap \
+    python3-dev python3-psycopg2 python3-ldap \
     python3-pip python3-pil python3-lxml python3-pylibmc \
     uwsgi uwsgi-plugin-python3 \
     firefox-esr
@@ -36,9 +30,10 @@ RUN apt-get install -y devscripts build-essential debhelper pkg-kde-tools sharut
 # RUN cd /tmp/proj && debuild -i -us -uc -b && dpkg -i ../*.deb
 
 # Install pip packages
-RUN pip install pip --upgrade \
-    && pip install pygdal==$(gdal-config --version).* \
-        flower==0.9.4
+RUN pip install pip --upgrade
+RUN pip install numpy==1.23.5
+RUN pip install GDAL=="$(gdal-config --version).*"
+RUN pip install flower==0.9.4
 
 # Activate "memcached"
 RUN apt install -y memcached
@@ -83,3 +78,34 @@ EXPOSE 8000
 
 # We provide no command or entrypoint as this image can be used to serve the django project or run celery tasks
 # ENTRYPOINT /usr/src/delft/entrypoint.sh
+
+FROM prod as dev
+
+RUN pip install --upgrade --no-cache-dir  --src /usr/src -r requirements-dev.txt
+RUN pip install --upgrade  -e .
+
+# This section taken on 2 July 2015 from
+# https://docs.docker.com/examples/running_ssh_service/
+# Sudo is needed by pycharm when it tries to pip install packages
+RUN apt-get update && apt-get install -y openssh-server sudo
+RUN mkdir -p /var/run/sshd
+RUN echo 'root:docker' | chpasswd
+RUN sed -i 's/^PermitRootLogin */#PermitRootLogin /' /etc/ssh/sshd_config
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+# --------------------------------------------------------
+# Open ports as needed
+# --------------------------------------------------------
+
+# Open port 8080 as we will be running our django dev server on
+EXPOSE 8080
+# Open port 22 as we will be using a remote interpreter from pycharm
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]
