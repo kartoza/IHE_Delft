@@ -67,7 +67,7 @@ RUN chmod +x /usr/bin/celery-cmd
 # RUN cd /usr/src/geonode-contribs/geonode-logstash; pip install --upgrade  -e . \
 #     cd /usr/src/geonode-contribs/ldap; pip install --upgrade  -e .
 
-ENV CACHE_BUSTER=26.03.2026
+ENV CACHE_BUSTER=25.03.2026
 RUN pip install --upgrade --no-cache-dir  --src /usr/src -r requirements.txt
 RUN pip install --upgrade  -e .
 
