@@ -1,7 +1,10 @@
+import json
+
+from django import template
+
 from delft.models import (
     RegionExtension, GroupProfileExtension
 )
-from django import template
 from geonode.base.models import HierarchicalKeyword, GroupProfile, ResourceBase
 
 register = template.Library()
@@ -53,7 +56,16 @@ def get_keyword_children_in_list(context, keyword_slug):
         query = HierarchicalKeyword.objects.none()
     if keyword_slug == '_other':
         query = HierarchicalKeyword.objects.filter(depth=1, numchild=0)
-    return list(query.values_list('name', flat=True))
+
+    # For the default value
+    default_values = HierarchicalKeyword.objects.none()
+    if keyword_slug == 'phases':
+        default_values = query.filter(name__iexact='Phase 3')
+
+    return json.dumps({
+        'children': list(query.values_list('name', flat=True)),
+        'default_values': list(default_values.values_list('name', flat=True)),
+    })
 
 
 @register.simple_tag(takes_context=True)
@@ -114,4 +126,4 @@ def keywords(context, resource):
 @register.simple_tag(takes_context=True)
 def delft_version(context):
     """Return version of delft."""
-    return '0.0.19.1'
+    return '0.0.20'
