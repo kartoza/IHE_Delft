@@ -792,3 +792,7 @@ form .row {
 #id_crop_entry #image {
     min-height: 109px !important;
 }
+
+.msgapi a:focus {
+    outline: unset !important;
+}
