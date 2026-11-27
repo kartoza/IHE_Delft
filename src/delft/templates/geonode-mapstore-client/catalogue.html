@@ -158,6 +158,30 @@
                             new MutationObserver(bind).observe(document.body, { childList: true, subtree: true });
                             bind();
                         })();
+
+                        // GeoStory viewer: mark portrait images so CSS can apply 2:3 (landscape stays 3:2)
+                        ;(function () {
+                            const SELECTOR = '.page-geostory-viewer .ms-media-image img';
+
+                            function markOrientation(img) {
+                                const wrapper = img.closest('.ms-media-image');
+                                if (wrapper && img.naturalWidth && img.naturalHeight) {
+                                    wrapper.classList.toggle('is-portrait', img.naturalHeight > img.naturalWidth);
+                                }
+                            }
+
+                            // 'load' does not bubble, so listen in the capture phase to catch
+                            // images that React renders later.
+                            document.addEventListener('load', function (event) {
+                                const img = event.target;
+                                if (img.tagName === 'IMG' && img.matches(SELECTOR)) {
+                                    markOrientation(img);
+                                }
+                            }, true);
+
+                            // Images that already finished loading before this script ran
+                            document.querySelectorAll(SELECTOR).forEach(markOrientation);
+                        })();
                     </script>
                 {% endblock %}
             </div>

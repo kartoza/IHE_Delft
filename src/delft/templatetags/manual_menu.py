@@ -106,6 +106,11 @@ def get_project_base_left_topbar_menu(context):
             "type": "link",
             "href": "/about",
             "label": "About"
+        },
+        {
+            "type": "link",
+            "href": "/groups/?categories__slug__in=phase-3",
+            "label": "Project profiles"
         }
     ]
 
@@ -125,11 +130,6 @@ def get_project_base_right_topbar_menu(context):
                 "type": "link",
                 "href": "/people/",
                 "label": "People"
-            },
-            {
-                "type": "link",
-                "href": "/groups/",
-                "label": "Project profiles"
             }
         ]
     }
