@@ -1,18 +1,52 @@
 {% load i18n %}
 {% load delft_tags %}
+<style>
+  .footer-item img {
+    height: 26px;
+  }
+
+  .footer-item,
+  .footer-item span {
+    color: white !important;
+  }
+
+  a.footer-item:hover {
+    opacity: 0.7;
+  }
+</style>
 <footer class="gn-footer footer-wrapper">
-    <div style="display: flex; width: 100%; align-items: center">
-        <a class="footer-item" href="https://www.un-ihe.org/" target="_blank"
+    <div style="display: flex; width: 100%; align-items: center; gap:0.5rem">
+        <a class="footer-item" href="https://www.un-ihe.org/" target="_blank" style="margin-right: 0.5rem"
            title="un-ihe">
-            <img src="/static/img/logo/short-white.svg#white" height="26"/>
+            <img src="/static/img/logo/short-white.svg#white"/>
         </a>
-        <div class="footer-item" style="padding-left: 15px">
-            {% trans "Web site developed by" %}&nbsp;
+        <div class="footer-item">
+            {% trans "Developed by" %}&nbsp;
         </div>
         <a class="footer-item" href="https://kartoza.com/" target="_blank"
            title="Kartoza">
-            <img src="/static/img/logo/kartoza-logo-white.svg" height="26"/>
+            <img src="/static/img/logo/kartoza-logo-white.svg"/>
         </a>
-        <div style="text-align: right; flex-grow: 1">Version {% delft_version %}</div>
+        <div style="text-align: right; flex-grow: 1"></div>
+
+        {% if links.footer %}
+            <div style="display: flex; gap: 1rem; align-items: center">
+                {% for link in links.footer %}
+                    <a class="footer-item" href="{{ link.url }}" target="_blank"
+                       rel="noopener noreferrer"
+                       title="{{ link.title|default:link.url }}"
+                       style="display: flex; align-items: center; gap: 0.5rem">
+                        {% if link.icon %}
+                            <img src="{{ link.icon }}" alt="{{ link.title|default:'' }}"/>
+                        {% endif %}
+                        {% if link.title %}
+                            <span>{{ link.title }}</span>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+            <div>•</div>
+        {% endif %}
+        <div>{% delft_version %}</div>
     </div>
 </footer>

@@ -18,6 +18,11 @@
   transition: margin-top 0.3s ease;
 }
 
+.page-geostory-viewer .ms-text-wrapper {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .page-geostory-viewer header.gn-header-hidden {
   pointer-events: none;
 }
@@ -25,6 +30,7 @@
 .page-geostory-viewer .ms-section-title .ms-content-text {
   box-shadow: unset !important;
 }
+
 .page-geostory-viewer .ms-section-title .ms-content-body {
   box-shadow: unset !important;
 }
