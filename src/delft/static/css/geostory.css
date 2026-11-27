@@ -11,7 +11,7 @@
 
 .page-geostory-viewer .gn-viewer-layout-body .ms-content {
   padding: 0 !important;
-  max-width: 750px !important;
+  max-width: 700px !important;
 }
 
 .page-geostory-viewer header {
@@ -60,4 +60,22 @@
 
 .page-geostory-viewer .ms-content-body p {
   font-size: 18px !important;
+}
+
+/* Landscape images are always 3:2, portrait images are always 2:3.
+   The .is-portrait class is set by JS in catalogue.html. */
+.page-geostory-viewer .ms-media-image img {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 3 / 2;
+  object-fit: cover !important;
+}
+
+.page-geostory-viewer .ms-media-image.is-portrait {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.page-geostory-viewer .ms-media-image.is-portrait img {
+  aspect-ratio: 2 / 3;
 }
