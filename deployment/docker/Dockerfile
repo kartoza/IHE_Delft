@@ -1,10 +1,10 @@
-FROM python:3.10-bullseye as prod
+FROM python:3.10-bookworm as prod
 LABEL GeoNode development team
 
 RUN mkdir -p /usr/src/delft
 
 # Enable postgresql-client-13
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
 # This section is borrowed from the official Django image but adds GDAL and others

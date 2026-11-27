@@ -126,4 +126,4 @@ def keywords(context, resource):
 @register.simple_tag(takes_context=True)
 def delft_version(context):
     """Return version of delft."""
-    return '0.0.20'
+    return '0.1.0'

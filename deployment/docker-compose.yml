@@ -23,6 +23,8 @@ x-common-django:
       condition: service_healthy
     geoserver:
       condition: service_healthy
+    rabbitmq:
+      condition: service_started
 
 services:
 
@@ -165,6 +167,7 @@ services:
       - geoserver
       - db
       - celery
+      - rabbitmq
     ports:
       # for django test server
       - "9500:8080"
