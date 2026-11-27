@@ -109,7 +109,7 @@ def get_project_base_left_topbar_menu(context):
         },
         {
             "type": "link",
-            "href": "/groups/",
+            "href": "/groups/?categories__slug__in=phase-3",
             "label": "Project profiles"
         }
     ]

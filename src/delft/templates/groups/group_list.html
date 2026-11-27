@@ -1,6 +1,7 @@
 {% extends "groups/group_base.html" %}
 {% load i18n %}
 {% load static %}
+{% load delft_tags %}
 
 {% block title %} {% trans "Explore Projects" %} - {{ block.super }} {% endblock %}
 
@@ -29,4 +30,5 @@
   {% with include_spatial='false' %}
   {% include 'search/search_scripts.html' %}
   {% endwith %}
+  <script src="{% static 'js/group-category-filter.js' %}?v={% delft_version %}"></script>
 {% endblock extra_script %}
