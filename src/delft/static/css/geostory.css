@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400;1,700&display=swap');
+
+.page-geostory-viewer .gn-viewer-layout-body .ms-section-background {
+  position: relative !important;
+}
+
+.page-geostory-viewer .gn-viewer-layout-body,
+.page-geostory-viewer .gn-viewer-layout-body *:not(.glyphicon):not([class^="glyphicon-"]):not([class*=" glyphicon-"]):not(.fa):not([class^="fa-"]):not([class*=" fa-"]) {
+  font-family: 'Source Serif Pro', serif !important;
+}
+
+.page-geostory-viewer .gn-viewer-layout-body .ms-content {
+  padding: 0 !important;
+  max-width: 750px !important;
+}
+
+.page-geostory-viewer header {
+  transition: margin-top 0.3s ease;
+}
+
+.page-geostory-viewer header.gn-header-hidden {
+  pointer-events: none;
+}
+
+.page-geostory-viewer .ms-section-title .ms-content-text {
+  box-shadow: unset !important;
+}
+.page-geostory-viewer .ms-section-title .ms-content-body {
+  box-shadow: unset !important;
+}
+
+.page-geostory-viewer .ms-media-credits small,
+.page-geostory-viewer .ms-media-caption small {
+  font-size: 16px !important;
+}
+
+.page-geostory-viewer .ms-media-credits small {
+  box-shadow: unset !important;
+  border-bottom: 1px solid #777;
+  margin-bottom: 1rem !important;
+  padding-bottom: unset !important;
+  color: inherit !important;;
+}
+
+.page-geostory-viewer .ms-media-caption {
+  padding-left: unset;
+  text-align: center;
+  border: unset !important;
+}
+
+.page-geostory-viewer .ms-content-body h2 {
+  font-size: 22px !important;
+}
+
+.page-geostory-viewer .ms-content-body p {
+  font-size: 18px !important;
+}
